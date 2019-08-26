@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {PTORequest} from '../../shared/pto-request.model';
 
 @Component({
   selector: 'app-view-requests',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view-requests.component.css']
 })
 export class ViewRequestsComponent implements OnInit {
+  @Input() requestList: PTORequest[];
 
   constructor() { }
 

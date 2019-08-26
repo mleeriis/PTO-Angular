@@ -1,0 +1,12 @@
+<table class="table table-bordered">
+  <tr>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Status</th>
+  </tr>
+  <tr *ngFor="let eachRequest of requestList">
+    <td>{{eachRequest.StartDate.toDateString()}}</td>
+    <td>{{eachRequest.EndDate.toDateString()}}</td>
+    <td>{{eachRequest.Status}}</td>
+  </tr>
+</table>

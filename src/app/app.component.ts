@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'PTO-Angular';
+  loadedPage = 'view-requests';
+
+  navigateTo(targetPage: string){
+    this.loadedPage = targetPage;
+  }
 }
