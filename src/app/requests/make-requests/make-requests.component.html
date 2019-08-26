@@ -1,6 +1,9 @@
-<a href="ViewRequestServlet"><button>View Requests</button></a>
 <form name="createRequest" action="CreateRequestServlet" method="POST">
-  <label>Start Date: <input type="date" name="startDate" required></label>
-  <label>End Date: <input type="date" name="endDate" required></label>
-  <input type="submit" value="Submit Request" name="submitRequest">
+  <div class="form-group">
+    <label>Start Date: <input type="date" name="startDate" class="form-control" required></label>
+  </div>
+  <div class="form-group">
+    <label>End Date: <input type="date" name="endDate" class="form-control" required></label>
+  </div>
+    <button type="submit" name="submitRequest" class="btn btn-primary">Submit Request</button>
 </form>
