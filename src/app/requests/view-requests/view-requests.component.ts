@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PTORequest} from '../../shared/pto-request.model';
+import {RequestsService} from '../requests.service';
 
 @Component({
   selector: 'app-view-requests',
@@ -7,11 +8,16 @@ import {PTORequest} from '../../shared/pto-request.model';
   styleUrls: ['./view-requests.component.css']
 })
 export class ViewRequestsComponent implements OnInit {
-  @Input() requestList: PTORequest[];
+  requestList: PTORequest[];
 
-  constructor() { }
+  constructor(private requestsService: RequestsService) { }
 
   ngOnInit() {
+    this.requestList = this.requestsService.getPTORequests();
+    this.requestsService.requestsUpdated.subscribe((requests: PTORequest[]) => {
+        this.requestList = requests;
+      }
+    );
   }
 
 }

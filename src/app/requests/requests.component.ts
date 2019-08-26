@@ -1,29 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PTORequest} from '../shared/pto-request.model';
+import {RequestsService} from './requests.service';
 
 @Component({
   selector: 'app-requests',
   templateUrl: './requests.component.html',
-  styleUrls: ['./requests.component.css']
+  styleUrls: ['./requests.component.css'],
+  providers: [RequestsService]
 })
 export class RequestsComponent implements OnInit {
+  allRequests: PTORequest[];
 
-  dummyRequests: PTORequest[] = [
-    new PTORequest(1,1,new Date(2019,8,8), new Date(2019,8,9),1),
-    new PTORequest(2,1,new Date(2019,8,8), new Date(2019,8,9),2),
-    new PTORequest(3,1,new Date(2019,8,8), new Date(2019,8,9),3),
-    new PTORequest(4,1,new Date(2019,8,8), new Date(2019,8,9),1),
-    new PTORequest(5,2,new Date(2019,8,8), new Date(2019,8,9),1),
-    new PTORequest(6,2,new Date(2019,8,8), new Date(2019,8,9),2),
-    new PTORequest(7,2,new Date(2019,8,8), new Date(2019,8,9),3),
-  ];
-
-  constructor() { }
+  constructor(private requestsService: RequestsService) {
+  }
 
   ngOnInit() {
   }
 
-  updateRequests(newRequest: PTORequest){
-    this.dummyRequests.push(newRequest);
+  updateRequests(newRequest: PTORequest) {
+    this.allRequests.push(newRequest);
   }
 }
