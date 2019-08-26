@@ -10,7 +10,14 @@
           <li><a (click)="onSelect('company-holidays')">View Company Holidays</a></li>
           <li><a (click)="onSelect('view-requests')">View Requests</a></li>
           <li><a (click)="onSelect('make-requests')">Make Requests</a></li>
-          <li><a (click)="onSelect('hr-view')">HR View</a></li>
+          <li class="dropdown" appDropdown>
+            <a class="dropdown-toggle" role="button" (click)="onSelect('hr-view')">HR Actions <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a (click)="onSelect('hr-view')">Approve/Deny Requests</a></li>
+              <li><a>Add Employee</a></li>
+            </ul>
+          </li>
+
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown" appDropdown>
