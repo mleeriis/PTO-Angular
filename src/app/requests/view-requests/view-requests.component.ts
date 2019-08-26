@@ -20,4 +20,17 @@ export class ViewRequestsComponent implements OnInit {
     });
   }
 
+  displayStatusAsString(statusID: number) {
+    switch (statusID) {
+      case 1:
+        return 'Approved';
+      case 2:
+        return 'Pending';
+      case 3:
+        return 'Denied';
+      default:
+        return 'Pending';
+    }
+  }
+
 }
