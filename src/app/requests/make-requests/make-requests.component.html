@@ -1,9 +1,10 @@
-<form name="createRequest" action="CreateRequestServlet" method="POST">
+<form>
+  <!--name="createRequest" action="CreateRequestServlet" method="POST"> -->
   <div class="form-group">
-    <label>Start Date: <input type="date" name="startDate" class="form-control" required></label>
+    <label>Start Date: <input type="date" name="startDate" class="form-control" required #requestStartDate></label>
   </div>
   <div class="form-group">
-    <label>End Date: <input type="date" name="endDate" class="form-control" required></label>
+    <label>End Date: <input type="date" name="endDate" class="form-control" required #requestEndDate></label>
   </div>
-    <button type="submit" name="submitRequest" class="btn btn-primary">Submit Request</button>
+    <button type="submit" name="submitRequest" class="btn btn-primary" (click)="makeRequest()">Submit Request</button>
 </form>

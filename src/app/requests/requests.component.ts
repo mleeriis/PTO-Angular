@@ -23,4 +23,7 @@ export class RequestsComponent implements OnInit {
   ngOnInit() {
   }
 
+  updateRequests(newRequest: PTORequest){
+    this.dummyRequests.push(newRequest);
+  }
 }

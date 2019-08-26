@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {PTORequest} from '../../shared/pto-request.model';
 
 @Component({
   selector: 'app-make-requests',
@@ -6,10 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./make-requests.component.css']
 })
 export class MakeRequestsComponent implements OnInit {
+  @ViewChild('requestStartDate', {static: true}) requestedStartDate: ElementRef;
+  @ViewChild('requestEndDate', {static: true}) requestedEndDate: ElementRef;
 
-  constructor() { }
+  @Output() requestMade = new EventEmitter<PTORequest>();
+
+
+  constructor() {
+  }
 
   ngOnInit() {
+  }
+
+  makeRequest() {
+    const startDate = this.requestedStartDate.nativeElement.value;
+    const endDate = this.requestedEndDate.nativeElement.value;
+    const newRequest = new PTORequest(1, 1, startDate, endDate, 2);
+    this.requestMade.emit(newRequest);
   }
 
 }

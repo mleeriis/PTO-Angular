@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {PTORequest} from './shared/pto-request.model';
 
 @Component({
   selector: 'app-root',
