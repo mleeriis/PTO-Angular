@@ -9,6 +9,7 @@ import { EmployeeViewComponent } from './employee-view/employee-view.component';
 import { HrViewComponent } from './hr-view/hr-view.component';
 import { RequestsComponent } from './requests/requests.component';
 import {FormsModule} from '@angular/forms';
+import {DropdownDirective} from './shared/dropdown.directive';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {FormsModule} from '@angular/forms';
     MakeRequestsComponent,
     EmployeeViewComponent,
     HrViewComponent,
-    RequestsComponent
+    RequestsComponent,
+    DropdownDirective
   ],
   imports: [
     BrowserModule,
