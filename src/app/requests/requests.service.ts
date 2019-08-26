@@ -1,8 +1,8 @@
 import {PTORequest} from '../shared/pto-request.model';
-import {EventEmitter, Output} from '@angular/core';
+import {EventEmitter} from '@angular/core';
 
 export class RequestsService {
-  @Output() requestsUpdated = new EventEmitter<PTORequest[]>();
+  requestsUpdated = new EventEmitter<PTORequest[]>();
 
   private PTORequests: PTORequest[] = [
     new PTORequest(1, 1, new Date(2019, 8, 8), new Date(2019, 8, 9), 1),
@@ -16,5 +16,10 @@ export class RequestsService {
 
   getPTORequests() {
     return this.PTORequests.slice();
+  }
+
+  makeRequest(newRequest: PTORequest) {
+    this.PTORequests.push(newRequest);
+    this.requestsUpdated.emit(this.PTORequests.slice());
   }
 }

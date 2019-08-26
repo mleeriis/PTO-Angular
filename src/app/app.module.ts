@@ -8,6 +8,7 @@ import { MakeRequestsComponent } from './requests/make-requests/make-requests.co
 import { EmployeeViewComponent } from './employee-view/employee-view.component';
 import { HrViewComponent } from './hr-view/hr-view.component';
 import { RequestsComponent } from './requests/requests.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { RequestsComponent } from './requests/requests.component';
     RequestsComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

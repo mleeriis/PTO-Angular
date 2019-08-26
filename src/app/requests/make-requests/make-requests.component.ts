@@ -1,5 +1,6 @@
 import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {PTORequest} from '../../shared/pto-request.model';
+import {RequestsService} from '../requests.service';
 
 @Component({
   selector: 'app-make-requests',
@@ -13,7 +14,7 @@ export class MakeRequestsComponent implements OnInit {
   @Output() requestMade = new EventEmitter<PTORequest>();
 
 
-  constructor() {
+  constructor(private requestsService: RequestsService) {
   }
 
   ngOnInit() {
@@ -23,7 +24,7 @@ export class MakeRequestsComponent implements OnInit {
     const startDate = this.requestedStartDate.nativeElement.value;
     const endDate = this.requestedEndDate.nativeElement.value;
     const newRequest = new PTORequest(1, 1, startDate, endDate, 2);
-    this.requestMade.emit(newRequest);
+    this.requestsService.makeRequest(newRequest);
   }
 
 }

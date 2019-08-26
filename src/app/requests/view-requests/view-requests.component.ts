@@ -10,14 +10,14 @@ import {RequestsService} from '../requests.service';
 export class ViewRequestsComponent implements OnInit {
   requestList: PTORequest[];
 
-  constructor(private requestsService: RequestsService) { }
+  constructor(private requestsService: RequestsService) {
+  }
 
   ngOnInit() {
     this.requestList = this.requestsService.getPTORequests();
-    this.requestsService.requestsUpdated.subscribe((requests: PTORequest[]) => {
-        this.requestList = requests;
-      }
-    );
+    this.requestsService.requestsUpdated.subscribe((newRequests: PTORequest[]) => {
+      this.requestList = newRequests;
+    });
   }
 
 }
