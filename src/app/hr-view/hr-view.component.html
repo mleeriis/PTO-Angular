@@ -13,12 +13,12 @@
     <th></th>
   </tr>
 
-  <tr>
-      <td>Employee Name
+  <tr *ngFor="let request of allRequests">
+      <td>{{ request.EmployeeID }}
       </td>
-      <td>Start Date
+      <td>{{ request.StartDate }}
       </td>
-      <td>End Date
+      <td>{{ request.EndDate }}
       </td>
       <td>
           <button class="btn btn-success">Approve</button>
