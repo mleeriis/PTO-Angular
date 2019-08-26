@@ -10,6 +10,7 @@ import { HrViewComponent } from './hr-view/hr-view.component';
 import { RequestsComponent } from './requests/requests.component';
 import {FormsModule} from '@angular/forms';
 import {DropdownDirective} from './shared/dropdown.directive';
+import { AddEmployeeComponent } from './add-employee/add-employee.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {DropdownDirective} from './shared/dropdown.directive';
     EmployeeViewComponent,
     HrViewComponent,
     RequestsComponent,
-    DropdownDirective
+    DropdownDirective,
+    AddEmployeeComponent
   ],
   imports: [
     BrowserModule,
