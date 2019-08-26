@@ -1,6 +1,6 @@
 import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {PTORequest} from '../../shared/pto-request.model';
-import {RequestsService} from '../requests.service';
+import {RequestsService} from '../../services/requests.service';
 
 @Component({
   selector: 'app-make-requests',

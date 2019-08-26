@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {RequestsService} from '../requests/requests.service';
+import {RequestsService} from '../services/requests.service';
 import {PTORequest} from '../shared/pto-request.model';
 
 @Component({

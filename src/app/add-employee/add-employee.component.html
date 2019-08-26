@@ -1,25 +1,44 @@
 <form>
   <!-- name="createEmployee" action="CreateEmployeeServlet" method="POST"> -->
   <div class="form-group">
-    <label>First Name: <input type="text" name="Firstname" class="form-control" required></label>
+    <label>First Name: <input type="text" name="Firstname" class="form-control" required #firstNameInput></label>
   </div>
   <div class="form-group">
-    <label>Last Name: <input type="text" name="Lastname" class="form-control" required></label>
+    <label>Last Name: <input type="text" name="Lastname" class="form-control" required #lastNameInput></label>
   </div>
   <div class="form-group">
-    <label>email: <input type="email" name="email" class="form-control" required></label>
+    <label>email: <input type="email" name="email" class="form-control" required #emailInput></label>
   </div>
   <div class="form-group">
     <label>Role:
-      <select name="RoleID" class="form-control" required>
+      <select name="RoleID" class="form-control" required #roleIDInput>
         <option value="2" selected>Employee</option>
         <option value="1">HR</option>
       </select>
     </label>
   </div>
   <div class="form-group">
-    <label>Password: <input type="text" name="password"  class="form-control" required></label>
+    <label>Password: <input type="text" name="password"  class="form-control" required #passwordInput></label>
   </div>
-  <button type="submit" class="btn btn-primary" name="AddEmployee">Add Employee</button>
+  <button type="submit" class="btn btn-primary" name="AddEmployee" (click)="addEmployee()">Add Employee</button>
 </form>
 <h2>Message</h2>
+
+<hr>
+<p>For development troubleshooting only. Will not be displayed in production</p>
+<table class="table table-bordered">
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>email</th>
+    <th>Role</th>
+    <th>Password</th>
+  </tr>
+  <tr *ngFor="let employee of allEmployees">
+    <td>{{employee.Firstname}}</td>
+    <td>{{employee.Lastname}}</td>
+    <td>{{employee.email}}</td>
+    <td>{{employee.RoleID}}</td>
+    <td>{{employee.password}}</td>
+  </tr>
+</table>
