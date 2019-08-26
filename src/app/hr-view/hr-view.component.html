@@ -5,28 +5,26 @@
 </a>
 
 <h2>Pending Requests</h2>
-<table border="1">
+<table class="table table-bordered">
   <tr>
     <th>Employee Name</th>
     <th>Start Date</th>
     <th>End Date</th>
     <th></th>
   </tr>
-  <% for (int i = 0; i < everyRequest.size(); i++) {
-  %>
+
   <tr>
-      <td><%=everyRequest.get(i)[0]%>
+      <td>Employee Name
       </td>
-      <td><%=everyRequest.get(i)[1]%>
+      <td>Start Date
       </td>
-      <td><%=everyRequest.get(i)[2]%>
+      <td>End Date
       </td>
       <td>
           <button>Approve</button>
           <button>Deny</button>
       </td>
   </tr>
-  <%}%>
 
 
 </table>
