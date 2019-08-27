@@ -5,13 +5,13 @@ export class RequestsService {
   requestsUpdated = new EventEmitter<PTORequest[]>();
 
   private PTORequests: PTORequest[] = [
-    new PTORequest(1, 1, new Date(2019, 8, 8), new Date(2019, 8, 9), 1),
-    new PTORequest(2, 1, new Date(2019, 8, 8), new Date(2019, 8, 9), 2),
-    new PTORequest(3, 1, new Date(2019, 8, 8), new Date(2019, 8, 9), 3),
-    new PTORequest(4, 1, new Date(2019, 8, 8), new Date(2019, 8, 9), 1),
-    new PTORequest(5, 2, new Date(2019, 8, 8), new Date(2019, 8, 9), 1),
-    new PTORequest(6, 2, new Date(2019, 8, 8), new Date(2019, 8, 9), 2),
-    new PTORequest(7, 2, new Date(2019, 8, 8), new Date(2019, 8, 9), 3),
+    new PTORequest(1, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 1),
+    new PTORequest(2, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 2),
+    new PTORequest(3, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 3),
+    new PTORequest(4, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 1),
+    new PTORequest(5, 'Maria Lee', new Date(2019, 8, 8), new Date(2019, 8, 9), 1),
+    new PTORequest(6, 'Maria Lee', new Date(2019, 8, 8), new Date(2019, 8, 9), 2),
+    new PTORequest(7, 'Maria Lee', new Date(2019, 8, 8), new Date(2019, 8, 9), 3),
   ];
 
   getPTORequests() {

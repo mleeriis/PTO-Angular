@@ -1,4 +1,6 @@
 <h2>Pending Requests</h2>
+<p *ngIf="pendingRequests.length === 0; else pendingRequestsExist">No Pending Requests</p>
+<ng-template #pendingRequestsExist>
 <table class="table table-bordered">
   <tr>
     <th>Employee Name</th>
@@ -7,7 +9,7 @@
     <th></th>
   </tr>
   <tr *ngFor="let request of pendingRequests; let i = index">
-      <td>{{ request.EmployeeID }}
+      <td>{{ request.EmployeeName }}
       </td>
       <td>{{ request.StartDate }}
       </td>
@@ -19,6 +21,7 @@
       </td>
   </tr>
 </table>
+</ng-template>
 
 <h2>Approved Requests</h2>
 <table class="table table-bordered">
@@ -28,7 +31,7 @@
     <th>End Date</th>
   </tr>
   <tr *ngFor="let request of approvedRequests">
-    <td>{{ request.EmployeeID }}
+    <td>{{ request.EmployeeName }}
     </td>
     <td>{{ request.StartDate }}
     </td>
@@ -45,7 +48,7 @@
     <th>End Date</th>
   </tr>
   <tr *ngFor="let request of deniedRequests">
-    <td>{{ request.EmployeeID }}
+    <td>{{ request.EmployeeName }}
     </td>
     <td>{{ request.StartDate }}
     </td>

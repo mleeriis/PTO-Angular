@@ -25,7 +25,7 @@ export class MakeRequestsComponent implements OnInit {
   makeRequest() {
     const startDate = this.requestedStartDate.nativeElement.value;
     const endDate = this.requestedEndDate.nativeElement.value;
-    const newRequest = new PTORequest(1, 1, startDate, endDate, 2);
+    const newRequest = new PTORequest(1, 'Maria Lee', startDate, endDate, 2);
     this.requestsService.makeRequest(newRequest);
     this.router.navigate(['/view-requests']);
   }
