@@ -1,4 +1,6 @@
 import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
+
 import {PTORequest} from '../../shared/pto-request.model';
 import {RequestsService} from '../../services/requests.service';
 
@@ -14,7 +16,7 @@ export class MakeRequestsComponent implements OnInit {
   @Output() requestMade = new EventEmitter<PTORequest>();
 
 
-  constructor(private requestsService: RequestsService) {
+  constructor(private requestsService: RequestsService, private router: Router) {
   }
 
   ngOnInit() {
@@ -25,6 +27,7 @@ export class MakeRequestsComponent implements OnInit {
     const endDate = this.requestedEndDate.nativeElement.value;
     const newRequest = new PTORequest(1, 1, startDate, endDate, 2);
     this.requestsService.makeRequest(newRequest);
+    this.router.navigate(['/view-requests']);
   }
 
 }
