@@ -12,8 +12,7 @@
     <th>End Date</th>
     <th></th>
   </tr>
-
-  <tr *ngFor="let request of allRequests">
+  <tr *ngFor="let request of pendingRequests">
       <td>{{ request.EmployeeID }}
       </td>
       <td>{{ request.StartDate }}
@@ -25,6 +24,21 @@
           <button class="btn btn-danger">Deny</button>
       </td>
   </tr>
+</table>
 
-
+<h2>Approved Requests</h2>
+<table class="table table-bordered">
+  <tr>
+    <th>Employee Name</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+  </tr>
+  <tr *ngFor="let request of approvedRequests">
+    <td>{{ request.EmployeeID }}
+    </td>
+    <td>{{ request.StartDate }}
+    </td>
+    <td>{{ request.EndDate }}
+    </td>
+  </tr>
 </table>

@@ -8,16 +8,36 @@ import {PTORequest} from '../shared/pto-request.model';
   styleUrls: ['./hr-view.component.css']
 })
 export class HrViewComponent implements OnInit {
-  allRequests: PTORequest[];
-  approvedRequests: PTORequest[];
-  pendingRequests: PTORequest[];
-  deniedRequests: PTORequest[];
+  allRequests: PTORequest[] = [];
+  approvedRequests: PTORequest[] = [];
+  pendingRequests: PTORequest[] = [];
+  deniedRequests: PTORequest[] = [];
 
   constructor(private requestsService: RequestsService) {
   }
 
   ngOnInit() {
     this.allRequests = this.requestsService.getPTORequests();
+    this.sortRequests();
+  }
+
+  sortRequests() {
+    for (let entry of this.allRequests) {
+      switch (entry.Status) {
+        case 1:
+          this.approvedRequests.push(entry);
+          break;
+        case 2:
+          this.pendingRequests.push(entry);
+          break;
+        case 3:
+          this.deniedRequests.push(entry);
+          break;
+        default:
+          this.pendingRequests.push(entry);
+      }
+    }
   }
 
 }
+
