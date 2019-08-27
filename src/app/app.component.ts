@@ -9,10 +9,4 @@ import {RequestsService} from './services/requests.service';
   providers: [RequestsService]
 })
 export class AppComponent {
-  title = 'PTO-Angular';
-  loadedPage = 'view-requests';
-
-  navigateTo(targetPage: string){
-    this.loadedPage = targetPage;
-  }
 }
