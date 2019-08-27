@@ -12,13 +12,15 @@ import {RequestsComponent} from './requests/requests.component';
 import {FormsModule} from '@angular/forms';
 import {DropdownDirective} from './shared/dropdown.directive';
 import {AddEmployeeComponent} from './add-employee/add-employee.component';
+import { CompanyHolidayComponent } from './company-holiday/company-holiday.component';
 
 const appRoutes: Routes = [
   { path: '', component: ViewRequestsComponent},
   { path: 'make-requests', component: MakeRequestsComponent},
   {path: 'view-requests', component: ViewRequestsComponent},
   {path: 'hr', component: HrViewComponent},
-  {path: 'add-employee', component: AddEmployeeComponent}
+  {path: 'add-employee', component: AddEmployeeComponent},
+  {path: 'company-holidays', component: CompanyHolidayComponent}
 ];
 
 @NgModule({
@@ -31,7 +33,8 @@ const appRoutes: Routes = [
     HrViewComponent,
     RequestsComponent,
     DropdownDirective,
-    AddEmployeeComponent
+    AddEmployeeComponent,
+    CompanyHolidayComponent
   ],
   imports: [
     BrowserModule,
