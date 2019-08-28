@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 
 import {PTORequest} from '../../shared/pto-request.model';
 import {RequestsService} from '../../services/requests.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-make-requests',
@@ -10,8 +11,7 @@ import {RequestsService} from '../../services/requests.service';
   styleUrls: ['./make-requests.component.css']
 })
 export class MakeRequestsComponent implements OnInit {
-  @ViewChild('requestStartDate', {static: true}) requestedStartDate: ElementRef;
-  @ViewChild('requestEndDate', {static: true}) requestedEndDate: ElementRef;
+  @ViewChild('createRequestForm', {static: true}) createRequest: NgForm;
 
   @Output() requestMade = new EventEmitter<PTORequest>();
 
@@ -23,8 +23,8 @@ export class MakeRequestsComponent implements OnInit {
   }
 
   makeRequest() {
-    const startDate = new Date(this.requestedStartDate.nativeElement.value);
-    const endDate = new Date(this.requestedEndDate.nativeElement.value);
+    const startDate = new Date(this.createRequest.value.startDate);
+    const endDate = new Date(this.createRequest.value.endDate);
     const newRequest = new PTORequest(1, 'Maria Lee', startDate, endDate, 2);
     this.requestsService.makeRequest(newRequest);
     this.router.navigate(['/view-requests']);
