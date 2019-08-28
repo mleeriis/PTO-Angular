@@ -1,26 +1,58 @@
-<form>
-  <!-- name="createEmployee" action="CreateEmployeeServlet" method="POST"> -->
-  <div class="form-group">
-    <label>First Name: <input type="text" name="Firstname" class="form-control" required #firstNameInput></label>
+<form (ngSubmit)="addEmployee()" #addEmployeeForm="ngForm">
+  <div class="form-group" [ngClass]="{'has-error': firstNameInput.invalid && firstNameInput.touched}">
+    <label>First Name:
+      <input
+        type="text"
+        name="Firstname"
+        class="form-control"
+        required
+        ngModel
+        #firstNameInput="ngModel"></label>
   </div>
-  <div class="form-group">
-    <label>Last Name: <input type="text" name="Lastname" class="form-control" required #lastNameInput></label>
+  <div class="form-group" [ngClass]="{'has-error': lastNameInput.invalid && lastNameInput.touched}">
+    <label>Last Name:
+      <input
+        type="text"
+        name="Lastname"
+        class="form-control"
+        required
+        ngModel
+        #lastNameInput="ngModel"></label>
   </div>
-  <div class="form-group">
-    <label>email: <input type="email" name="email" class="form-control" required #emailInput></label>
+  <div class="form-group" [ngClass]="{'has-error': emailInput.invalid && emailInput.touched}">
+    <label>email:
+      <input
+        type="email"
+        name="email"
+        class="form-control"
+        required
+        ngModel
+        #emailInput="ngModel"></label>
   </div>
   <div class="form-group">
     <label>Role:
-      <select name="RoleID" class="form-control" required #roleIDInput>
-        <option value="2" selected>Employee</option>
+      <select
+        name="RoleID"
+        class="form-control"
+        required
+        [ngModel]="2"
+        #roleIDInput="ngModel">
+        <option value="2">Employee</option>
         <option value="1">HR</option>
       </select>
     </label>
   </div>
-  <div class="form-group">
-    <label>Password: <input type="text" name="password"  class="form-control" required #passwordInput></label>
+  <div class="form-group" [ngClass]="{'has-error': passwordInput.invalid && passwordInput.touched}">
+    <label>Password:
+      <input
+        type="text"
+        name="password"
+        class="form-control"
+        required
+        ngModel
+        #passwordInput="ngModel"></label>
   </div>
-  <button type="submit" class="btn btn-primary" name="AddEmployee" (click)="addEmployee()">Add Employee</button>
+  <button type="submit" class="btn btn-primary" name="AddEmployee" [disabled]="createEmployeeForm.invalid">Add Employee</button>
 </form>
 <h2>Message</h2>
 

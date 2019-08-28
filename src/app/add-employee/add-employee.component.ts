@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {EmployeesService} from '../services/employees.service';
 import {Employee} from '../shared/employee.model';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-add-employee',
@@ -9,11 +10,7 @@ import {Employee} from '../shared/employee.model';
   providers: [EmployeesService]
 })
 export class AddEmployeeComponent implements OnInit {
-  @ViewChild('firstNameInput', {static: true}) firstNameInput: ElementRef;
-  @ViewChild('lastNameInput', {static: true}) lastNameInput: ElementRef;
-  @ViewChild('emailInput', {static: true}) emailInput: ElementRef;
-  @ViewChild('roleIDInput', {static: true}) roleIDInput: ElementRef;
-  @ViewChild('passwordInput', {static: true}) passwordInput: ElementRef;
+  @ViewChild('addEmployeeForm', {static: true}) createEmployeeForm: NgForm;
 
   allEmployees: Employee[];
 
@@ -28,12 +25,13 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   addEmployee() {
-    const firstName = this.firstNameInput.nativeElement.value;
-    const lastName = this.lastNameInput.nativeElement.value;
-    const email = this.emailInput.nativeElement.value;
-    const roleID = this.roleIDInput.nativeElement.value;
-    const password = this.passwordInput.nativeElement.value;
+    const firstName = this.createEmployeeForm.value.Firstname;
+    const lastName = this.createEmployeeForm.value.Lastname;
+    const email = this.createEmployeeForm.value.email;
+    const roleID = this.createEmployeeForm.value.RoleID;
+    const password = this.createEmployeeForm.value.password;
     const newEmployee = new Employee(3, firstName, lastName, email, roleID, password, 120);
     this.employeeService.addEmployee(newEmployee);
+    this.createEmployeeForm.reset();
   }
 }
