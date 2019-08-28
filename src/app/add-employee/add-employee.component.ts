@@ -33,7 +33,7 @@ export class AddEmployeeComponent implements OnInit {
     const email = this.emailInput.nativeElement.value;
     const roleID = this.roleIDInput.nativeElement.value;
     const password = this.passwordInput.nativeElement.value;
-    const newEmployee = new Employee(3, firstName, lastName, email, roleID, password);
+    const newEmployee = new Employee(3, firstName, lastName, email, roleID, password, 120);
     this.employeeService.addEmployee(newEmployee);
   }
 }
