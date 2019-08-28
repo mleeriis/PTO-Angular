@@ -4,8 +4,8 @@ import {EventEmitter} from '@angular/core';
 export class EmployeesService {
   employeesUpdated = new EventEmitter<Employee[]>();
   private allEmployees: Employee[] = [
-    new Employee(1, 'Jillian', 'Marcotte', 'jmarcotte@riis.com', 1, 'password'),
-    new Employee(2, 'Maria', 'Lee', 'mlee@riis.com', 2, 'password')
+    new Employee(1, 'Jillian', 'Marcotte', 'jmarcotte@riis.com', 1, 'password', 120),
+    new Employee(2, 'Maria', 'Lee', 'mlee@riis.com', 2, 'password', 120)
   ];
 
   getEmployees() {
