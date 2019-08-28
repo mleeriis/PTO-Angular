@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 
 import {PTORequest} from '../../shared/pto-request.model';
 import {RequestsService} from '../../services/requests.service';
+import {start} from 'repl';
 
 @Component({
   selector: 'app-make-requests',
@@ -23,8 +24,8 @@ export class MakeRequestsComponent implements OnInit {
   }
 
   makeRequest() {
-    const startDate = this.requestedStartDate.nativeElement.value;
-    const endDate = this.requestedEndDate.nativeElement.value;
+    const startDate = new Date(this.requestedStartDate.nativeElement.value);
+    const endDate = new Date(this.requestedEndDate.nativeElement.value);
     const newRequest = new PTORequest(1, 'Maria Lee', startDate, endDate, 2);
     this.requestsService.makeRequest(newRequest);
     this.router.navigate(['/view-requests']);
