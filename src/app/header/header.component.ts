@@ -1,4 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {AuthService} from '../auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -6,13 +8,14 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor() {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   ngOnInit() {
   }
 
   onLogout() {
-    //this.authService.logout();
+    this.authService.logout();
+    this.router.navigate(['']);
   }
 }

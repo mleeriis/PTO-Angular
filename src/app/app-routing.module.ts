@@ -7,12 +7,13 @@ import {HrViewComponent} from './hr-view/hr-view.component';
 import {AddEmployeeComponent} from './add-employee/add-employee.component';
 import {CompanyHolidayComponent} from './company-holiday/company-holiday.component';
 import {LoginComponent} from './login/login.component';
+import {AuthGuard} from './auth-guard.service';
 
 
 const appRoutes: Routes = [
-  { path: '', component: ViewRequestsComponent},
+  { path: '', redirectTo: 'login', pathMatch: 'full'},
   { path: 'make-requests', component: MakeRequestsComponent},
-  {path: 'view-requests', component: ViewRequestsComponent},
+  {path: 'view-requests', canActivate: [AuthGuard], component: ViewRequestsComponent},
   {path: 'hr', component: HrViewComponent},
   {path: 'add-employee', component: AddEmployeeComponent},
   {path: 'company-holidays', component: CompanyHolidayComponent},
