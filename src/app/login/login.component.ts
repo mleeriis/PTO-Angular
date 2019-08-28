@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
 
@@ -8,6 +8,9 @@ import {Router} from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  @ViewChild('emailInput', {static: true}) emailInput: ElementRef;
+  @ViewChild('passwordInput', {static: true}) passwordInput: ElementRef;
+  errorMessage: string;
 
   constructor(private authService: AuthService, private router: Router) {
   }
@@ -16,8 +19,13 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-    this.authService.login();
-    this.router.navigate(['/view-requests']);
+    const email = this.emailInput.nativeElement.value;
+    const password = this.passwordInput.nativeElement.value;
+    if (this.authService.attemptLogin(email, password)) {
+      this.router.navigate(['/view-requests']);
+    } else {
+      this.errorMessage = 'Incorrect username or password';
+    }
   }
 
 }

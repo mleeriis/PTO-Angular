@@ -1,7 +1,7 @@
 export class AuthService {
   loggedIn = false;
 
-  isAuthenitcated() {
+  isAuthenticated() {
     const promise = new Promise(
       (resolve, reject) => {
         setTimeout(() => {
@@ -13,8 +13,11 @@ export class AuthService {
   }
 
 
-  login() {
-    this.loggedIn = true;
+  attemptLogin(email: string, password: string) {
+    if (email === 'mlee@riis.com' && password === 'password') {
+      this.loggedIn = true;
+    }
+    return this.loggedIn;
   }
 
   logout() {
