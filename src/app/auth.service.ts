@@ -14,6 +14,10 @@ export class AuthService {
 
 
   attemptLogin(email: string, password: string) {
+    if (email === null || password === null) {
+      return false;
+    }
+
     if (email === 'mlee@riis.com' && password === 'password') {
       this.loggedIn = true;
     }
