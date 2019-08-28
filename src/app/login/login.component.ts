@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -8,8 +9,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  @ViewChild('emailInput', {static: true}) emailInput: ElementRef;
-  @ViewChild('passwordInput', {static: true}) passwordInput: ElementRef;
+  @ViewChild('loginForm', {static: true}) loginForm: NgForm;
   errorMessage: string;
 
   constructor(private authService: AuthService, private router: Router) {
@@ -19,8 +19,8 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-    const email = this.emailInput.nativeElement.value;
-    const password = this.passwordInput.nativeElement.value;
+    const email = this.loginForm.value.email;
+    const password = this.loginForm.value.password;
     if (this.authService.attemptLogin(email, password)) {
       this.router.navigate(['/view-requests']);
     } else {
