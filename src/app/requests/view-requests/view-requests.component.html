@@ -5,8 +5,8 @@
     <th>Status</th>
   </tr>
   <tr *ngFor="let eachRequest of requestList">
-    <td>{{eachRequest.StartDate}}</td>
-    <td>{{eachRequest.EndDate}}</td>
+    <td>{{eachRequest.StartDate.toDateString()}}</td>
+    <td>{{eachRequest.EndDate.toDateString()}}</td>
     <td>{{displayStatusAsString(eachRequest.Status)}}</td>
   </tr>
 </table>

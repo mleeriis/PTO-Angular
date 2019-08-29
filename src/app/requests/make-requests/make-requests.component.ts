@@ -23,11 +23,15 @@ export class MakeRequestsComponent implements OnInit {
   }
 
   makeRequest() {
-    const startDate = new Date(this.createRequest.value.startDate);
-    const endDate = new Date(this.createRequest.value.endDate);
+    const startDate = this.convertHTMLDate(this.createRequest.value.startDate);
+    const endDate = this.convertHTMLDate(this.createRequest.value.endDate)
     const newRequest = new PTORequest(1, 'Maria Lee', startDate, endDate, 2);
     this.requestsService.makeRequest(newRequest);
     this.router.navigate(['/view-requests']);
+  }
+
+  private convertHTMLDate(inputDate: string){
+    return (new Date(new Date(inputDate).toLocaleString('en-US', { timeZone: 'UTC' })));
   }
 
 }
