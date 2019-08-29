@@ -1,38 +1,43 @@
-<form (ngSubmit)="addEmployee()" #addEmployeeForm="ngForm">
+<form (ngSubmit)="onAddEmployee()" #addEmployeeForm="ngForm">
   <div class="form-group" [ngClass]="{'has-error': firstNameInput.invalid && firstNameInput.touched}">
-    <label>First Name:
+    <label for="firstname" class="control-label">First Name: </label>
       <input
         type="text"
         name="Firstname"
+        id="firstname"
         class="form-control"
         required
         ngModel
-        #firstNameInput="ngModel"></label>
+        #firstNameInput="ngModel">
   </div>
   <div class="form-group" [ngClass]="{'has-error': lastNameInput.invalid && lastNameInput.touched}">
-    <label>Last Name:
+    <label for="lastname" class="control-label">Last Name: </label>
       <input
         type="text"
         name="Lastname"
+        id="lastname"
         class="form-control"
         required
         ngModel
-        #lastNameInput="ngModel"></label>
+        #lastNameInput="ngModel">
   </div>
   <div class="form-group" [ngClass]="{'has-error': emailInput.invalid && emailInput.touched}">
-    <label>email:
+    <label for="email" class="control-label">email: </label>
       <input
         type="email"
         name="email"
+        id="email"
         class="form-control"
+        email
         required
         ngModel
-        #emailInput="ngModel"></label>
+        #emailInput="ngModel">
   </div>
   <div class="form-group">
-    <label>Role:
+    <label for="role" class="control-label">Role: </label>
       <select
         name="RoleID"
+        id="role"
         class="form-control"
         required
         [ngModel]="2"
@@ -40,37 +45,40 @@
         <option value="2">Employee</option>
         <option value="1">HR</option>
       </select>
-    </label>
   </div>
   <div class="form-group" [ngClass]="{'has-error': passwordInput.invalid && passwordInput.touched}">
-    <label>Password:
+    <label for="password" class="control-label">Password: </label>
       <input
         type="text"
         name="password"
+        id="password"
         class="form-control"
         required
         ngModel
-        #passwordInput="ngModel"></label>
+        #passwordInput="ngModel">
   </div>
   <button type="submit" class="btn btn-primary" name="AddEmployee" [disabled]="createEmployeeForm.invalid">Add Employee</button>
 </form>
-<h2>Message</h2>
+<h2>{{ errorMessage}}</h2>
 
 <hr>
-<p>For development troubleshooting only. Will not be displayed in production</p>
-<table class="table table-bordered">
-  <tr>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>email</th>
-    <th>Role</th>
-    <th>Password</th>
-  </tr>
-  <tr *ngFor="let employee of allEmployees">
-    <td>{{employee.Firstname}}</td>
-    <td>{{employee.Lastname}}</td>
-    <td>{{employee.email}}</td>
-    <td>{{employee.RoleID}}</td>
-    <td>{{employee.password}}</td>
-  </tr>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>email</th>
+      <th>Role</th>
+      <th>Password</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let employee of allEmployees">
+      <td>{{employee.Firstname}}</td>
+      <td>{{employee.Lastname}}</td>
+      <td>{{employee.email}}</td>
+      <td>{{employee.RoleID}}</td>
+      <td>{{employee.password}}</td>
+    </tr>
+  </tbody>
 </table>

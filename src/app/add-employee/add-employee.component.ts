@@ -13,6 +13,7 @@ export class AddEmployeeComponent implements OnInit {
   @ViewChild('addEmployeeForm', {static: true}) createEmployeeForm: NgForm;
 
   allEmployees: Employee[];
+  errorMessage: string = '';
 
   constructor(private employeeService: EmployeesService) {
   }
@@ -24,7 +25,7 @@ export class AddEmployeeComponent implements OnInit {
     });
   }
 
-  addEmployee() {
+  onAddEmployee() {
     const firstName = this.createEmployeeForm.value.Firstname;
     const lastName = this.createEmployeeForm.value.Lastname;
     const email = this.createEmployeeForm.value.email;
