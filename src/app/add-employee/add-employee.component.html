@@ -1,3 +1,4 @@
+<div class="col-md-4">
 <form (ngSubmit)="onAddEmployee()" #addEmployeeForm="ngForm">
   <div class="form-group" [ngClass]="{'has-error': firstNameInput.invalid && firstNameInput.touched}">
     <label for="firstname" class="control-label">First Name: </label>
@@ -60,6 +61,7 @@
   <button type="submit" class="btn btn-primary" name="AddEmployee" [disabled]="createEmployeeForm.invalid">Add Employee</button>
 </form>
 <h2>{{ errorMessage}}</h2>
+</div>
 
 <hr>
 <table class="table table-bordered table-striped">
