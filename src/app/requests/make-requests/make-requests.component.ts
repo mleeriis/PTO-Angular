@@ -27,8 +27,8 @@ export class MakeRequestsComponent implements OnInit {
   }
 
   onMakeRequest() {
-    const startDate = this.convertHTMLDate(this.createRequest.value.startDate);
-    const endDate = this.convertHTMLDate(this.createRequest.value.endDate);
+    const startDate = this.convertHTMLToDate(Date(this.createRequest.value.startDate);
+    const endDate = this.convertHTMLToDate(this.createRequest.value.endDate);
 
     if (startDate.toDateString() === this.currentDate.toDateString()) {
       this.errorMessage = 'PTO cannot start today';
@@ -43,7 +43,7 @@ export class MakeRequestsComponent implements OnInit {
     }
   }
 
-  private convertHTMLDate(inputDate: string) {
+  private convertHTMLToDate(inputDate: string) {
     return (new Date(new Date(inputDate).toLocaleString('en-US', {timeZone: 'UTC'})));
   }
 
