@@ -1,13 +1,16 @@
 <h2>Pending Requests</h2>
 <p *ngIf="pendingRequests.length === 0; else pendingRequestsExist">No Pending Requests</p>
 <ng-template #pendingRequestsExist>
-<table class="table table-bordered">
+<table class="table table-bordered table-striped">
+  <thead>
   <tr>
     <th>Employee Name</th>
     <th>Start Date</th>
     <th>End Date</th>
     <th></th>
   </tr>
+  </thead>
+  <tbody>
   <tr *ngFor="let request of pendingRequests; let i = index">
       <td>{{ request.EmployeeName }}
       </td>
@@ -20,39 +23,48 @@
           <button class="btn btn-danger"(click)="onProcessRequest(request, i, 'deny')">Deny</button>
       </td>
   </tr>
+  </tbody>
 </table>
 </ng-template>
 
 <h2>Approved Requests</h2>
-<table class="table table-bordered">
-  <tr>
-    <th>Employee Name</th>
-    <th>Start Date</th>
-    <th>End Date</th>
-  </tr>
-  <tr *ngFor="let request of approvedRequests">
-    <td>{{ request.EmployeeName }}
-    </td>
-    <td>{{ request.StartDate }}
-    </td>
-    <td>{{ request.EndDate }}
-    </td>
-  </tr>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Employee Name</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let request of approvedRequests">
+      <td>{{ request.EmployeeName }}
+      </td>
+      <td>{{ request.StartDate }}
+      </td>
+      <td>{{ request.EndDate }}
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 <h2>Denied Requests</h2>
-<table class="table table-bordered">
-  <tr>
-    <th>Employee Name</th>
-    <th>Start Date</th>
-    <th>End Date</th>
-  </tr>
-  <tr *ngFor="let request of deniedRequests">
-    <td>{{ request.EmployeeName }}
-    </td>
-    <td>{{ request.StartDate }}
-    </td>
-    <td>{{ request.EndDate }}
-    </td>
-  </tr>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Employee Name</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let request of deniedRequests">
+      <td>{{ request.EmployeeName }}
+      </td>
+      <td>{{ request.StartDate }}
+      </td>
+      <td>{{ request.EndDate }}
+      </td>
+    </tr>
+  </tbody>
 </table>

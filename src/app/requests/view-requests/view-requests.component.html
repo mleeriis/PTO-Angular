@@ -1,12 +1,21 @@
-<table class="table table-bordered">
-  <tr>
-    <th>Start Date</th>
-    <th>End Date</th>
-    <th>Status</th>
-  </tr>
-  <tr *ngFor="let eachRequest of requestList">
-    <td>{{eachRequest.StartDate.toDateString()}}</td>
-    <td>{{eachRequest.EndDate.toDateString()}}</td>
-    <td>{{displayStatusAsString(eachRequest.Status)}}</td>
-  </tr>
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let eachRequest of requestList"
+        [ngClass]="{'success': eachRequest.Status === 1, 'danger': eachRequest.Status === 3}">
+      <td>{{eachRequest.StartDate.toDateString()}}</td>
+      <td>{{eachRequest.EndDate.toDateString()}}</td>
+      <td>{{displayStatusAsString(eachRequest.Status)}}</td>
+      <td>
+        <button class="btn btn-danger">Cancel Request</button>
+      </td>
+    </tr>
+  </tbody>
 </table>
