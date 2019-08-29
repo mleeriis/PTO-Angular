@@ -1,4 +1,4 @@
-<form (ngSubmit)="makeRequest()" #createRequestForm="ngForm">
+<form (ngSubmit)="onMakeRequest()" #createRequestForm="ngForm">
   <div class="form-group" [ngClass]="{'has-error': requestStartDate.invalid && requestStartDate.touched}">
     <label>Start Date:
       <input
@@ -7,6 +7,7 @@
         name="startDate"
         required
         ngModel
+        [min]="currentDateString"
         #requestStartDate="ngModel"></label>
     <span class="help-block" *ngIf="requestStartDate.invalid && requestStartDate.touched">Start Date cannot be blank</span>
   </div>
@@ -18,8 +19,10 @@
         class="form-control"
         required
         ngModel
+        [min]="currentDateString"
         #requestEndDate="ngModel"></label>
       <span class="help-block" *ngIf="requestEndDate.invalid && requestEndDate.touched">End Date cannot be blank</span>
   </div>
+    <p style="color: red">{{errorMessage}}</p>
     <button type="submit" name="submitRequest" class="btn btn-primary">Submit Request</button>
 </form>

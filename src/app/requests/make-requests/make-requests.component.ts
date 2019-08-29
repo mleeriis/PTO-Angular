@@ -15,6 +15,10 @@ export class MakeRequestsComponent implements OnInit {
 
   @Output() requestMade = new EventEmitter<PTORequest>();
 
+  errorMessage = '';
+
+  currentDate: Date = new Date();
+  currentDateString: string = this.currentDate.toISOString().substr(0, 10);
 
   constructor(private requestsService: RequestsService, private router: Router) {
   }
@@ -22,16 +26,25 @@ export class MakeRequestsComponent implements OnInit {
   ngOnInit() {
   }
 
-  makeRequest() {
+  onMakeRequest() {
     const startDate = this.convertHTMLDate(this.createRequest.value.startDate);
-    const endDate = this.convertHTMLDate(this.createRequest.value.endDate)
-    const newRequest = new PTORequest(1, 'Maria Lee', startDate, endDate, 2);
-    this.requestsService.makeRequest(newRequest);
-    this.router.navigate(['/view-requests']);
+    const endDate = this.convertHTMLDate(this.createRequest.value.endDate);
+
+    if (startDate.toDateString() === this.currentDate.toDateString()) {
+      this.errorMessage = 'PTO cannot start today';
+    } else if ((startDate.getTime() || endDate.getTime()) < this.currentDate.getTime()) {
+      this.errorMessage = 'Cannot choose a date in the past';
+    } else if (endDate.getTime() < startDate.getTime()) {
+      this.errorMessage = 'End Date cannot be before Start Date';
+    } else {
+      const newRequest = new PTORequest(1, 'Maria Lee', startDate, endDate, 2);
+      this.requestsService.makeRequest(newRequest);
+      this.router.navigate(['/view-requests']);
+    }
   }
 
-  private convertHTMLDate(inputDate: string){
-    return (new Date(new Date(inputDate).toLocaleString('en-US', { timeZone: 'UTC' })));
+  private convertHTMLDate(inputDate: string) {
+    return (new Date(new Date(inputDate).toLocaleString('en-US', {timeZone: 'UTC'})));
   }
 
 }
