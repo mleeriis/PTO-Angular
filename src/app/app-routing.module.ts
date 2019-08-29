@@ -13,7 +13,7 @@ import {AuthGuard} from './auth-guard.service';
 const appRoutes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
   { path: 'make-requests', component: MakeRequestsComponent},
-  {path: 'view-requests', component: ViewRequestsComponent},
+  {path: 'view-requests', canActivate: [AuthGuard], component: ViewRequestsComponent},
   {path: 'hr', component: HrViewComponent},
   {path: 'add-employee', component: AddEmployeeComponent},
   {path: 'company-holidays', component: CompanyHolidayComponent},
