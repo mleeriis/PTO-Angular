@@ -21,7 +21,7 @@ export class ViewRequestsComponent implements OnInit {
     });
   }
 
-  displayStatusAsString(statusID: number) {
+  private displayStatusAsString(statusID: number) {
     switch (statusID) {
       case 1:
         return 'Approved';

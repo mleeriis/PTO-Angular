@@ -21,7 +21,20 @@ export class HrViewComponent implements OnInit {
     this.sortRequests();
   }
 
-  sortRequests() {
+  onProcessRequest(pendingRequest: PTORequest, arrayIndex: number, change: string) {
+    if (change === 'approve') {
+      pendingRequest.Status = 1;
+      this.requestsService.processRequest(pendingRequest, 1);
+      this.approvedRequests.push(pendingRequest);
+    } else {
+      pendingRequest.Status = 3;
+      this.requestsService.processRequest(pendingRequest, 3);
+      this.deniedRequests.push(pendingRequest);
+    }
+    this.pendingRequests.splice(arrayIndex, 1);
+  }
+
+  private sortRequests() {
     for (const entry of this.allRequests) {
       switch (entry.Status) {
         case 1:
@@ -37,19 +50,6 @@ export class HrViewComponent implements OnInit {
           this.pendingRequests.push(entry);
       }
     }
-  }
-
-  onProcessRequest(pendingRequest: PTORequest, arrayIndex: number, change: string) {
-    if (change === 'approve') {
-      pendingRequest.Status = 1;
-      this.requestsService.processRequest(pendingRequest, 1);
-      this.approvedRequests.push(pendingRequest);
-    } else {
-      pendingRequest.Status = 3;
-      this.requestsService.processRequest(pendingRequest, 3)
-      this.deniedRequests.push(pendingRequest);
-    }
-    this.pendingRequests.splice(arrayIndex, 1);
   }
 }
 
