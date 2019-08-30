@@ -37,7 +37,7 @@ export class MakeRequestsComponent implements OnInit {
     } else if (endDate.getTime() < startDate.getTime()) {
       this.errorMessage = 'End Date cannot be before Start Date';
     } else {
-      const newRequest = new PTORequest(1, 'Maria Lee', startDate, endDate, 2);
+      const newRequest = new PTORequest(1, 2, 'Maria Lee', startDate, endDate, 2);
       this.requestsService.makeRequest(newRequest);
       this.router.navigate(['/view-requests']);
     }

@@ -8,7 +8,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let eachRequest of requestList"
+    <tr *ngFor="let eachRequest of currentEmployeeRequests"
         [ngClass]="{'success': eachRequest.Status === 1, 'danger': eachRequest.Status === 3}">
       <td>{{eachRequest.StartDate.toDateString()}}</td>
       <td>{{eachRequest.EndDate.toDateString()}}</td>

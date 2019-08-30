@@ -1,6 +1,7 @@
 export class AuthService {
   loggedIn = false;
   employeeType: number;
+  employeeId: number;
 
   isAuthenticated() {
     const promise = new Promise(
@@ -20,9 +21,11 @@ export class AuthService {
     } else if (email === 'mlee@riis.com' && password === 'password') {
       this.loggedIn = true;
       this.employeeType = 2;
+      this.employeeId = 2;
     } else if (email === 'jmarcotte@riis.com' && password === 'password') {
       this.loggedIn = true;
       this.employeeType = 1;
+      this.employeeId = 1;
     }
     return this.loggedIn;
   }

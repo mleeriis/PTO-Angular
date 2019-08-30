@@ -22,7 +22,7 @@ export class HrViewComponent implements OnInit {
   }
 
   sortRequests() {
-    for (let entry of this.allRequests) {
+    for (const entry of this.allRequests) {
       switch (entry.Status) {
         case 1:
           this.approvedRequests.push(entry);
