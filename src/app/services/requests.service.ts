@@ -21,7 +21,7 @@ export class RequestsService {
   }
 
   getCurrentUsersRequests(employeeID: number) {
-    const currentRequests: PTORequest[] = []
+    const currentRequests: PTORequest[] = [];
     for (const aRequest of this.PTORequests) {
       if (aRequest.EmployeeId === employeeID) {
         currentRequests.push(aRequest);
@@ -33,7 +33,7 @@ export class RequestsService {
 
   makeRequest(newRequest: PTORequest) {
     this.PTORequests.push(newRequest);
- //   this.calculateTime(newRequest.StartDate, newRequest.EndDate);
+    //   this.calculateTime(newRequest.StartDate, newRequest.EndDate);
     this.currentEmployeeRequests.push(newRequest);
     this.requestsUpdated.emit(this.currentEmployeeRequests.slice());
   }
@@ -42,6 +42,13 @@ export class RequestsService {
   // INSERT INTO Requests VALUES (EmployeeID, CAST('startDate' AS datetime),CAST('endDate' AS datetime), 2);
   // ^ startDate and endDate as strings
   // INSERT INTO Requests VALUES (EmployeeID, StartDate, EndDate, 2);
+
+  processRequest(pendingRequest: PTORequest, statusCode: number) {
+    const requestID = pendingRequest.Id;
+    return requestID;
+  }
+  // SQL Query to update
+  // UPDATE Requests SET Status = $statusCode WHERE Id = $requestID;
 
   /*
   calculateTime(startDate: Date, endDate: Date) {

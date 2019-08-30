@@ -42,9 +42,11 @@ export class HrViewComponent implements OnInit {
   onProcessRequest(pendingRequest: PTORequest, arrayIndex: number, change: string) {
     if (change === 'approve') {
       pendingRequest.Status = 1;
+      this.requestsService.processRequest(pendingRequest, 1);
       this.approvedRequests.push(pendingRequest);
     } else {
       pendingRequest.Status = 3;
+      this.requestsService.processRequest(pendingRequest, 3)
       this.deniedRequests.push(pendingRequest);
     }
     this.pendingRequests.splice(arrayIndex, 1);
