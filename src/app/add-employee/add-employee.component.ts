@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {EmployeesService} from '../services/employees.service';
 import {Employee} from '../shared/employee.model';
 import {NgForm} from '@angular/forms';
