@@ -32,14 +32,17 @@ export class RequestsService {
   }
 
   makeRequest(newRequest: PTORequest) {
+    const startDateISOString = newRequest.StartDate.toISOString();
+    const endDateISOString = newRequest.EndDate.toISOString();
+    const employeeID = newRequest.EmployeeId;
+
     this.PTORequests.push(newRequest);
     //   this.calculateTime(newRequest.StartDate, newRequest.EndDate);
     this.currentEmployeeRequests.push(newRequest);
     this.requestsUpdated.emit(this.currentEmployeeRequests.slice());
   }
-
   // SQL Query to Insert New Request
-  // INSERT INTO Requests VALUES (EmployeeID, CAST('startDate' AS datetime),CAST('endDate' AS datetime), 2);
+  // INSERT INTO Requests VALUES ($employeeID, CAST('$startDateISOString' AS datetime),CAST('$endDateISOString' AS datetime), 2);
   // ^ startDate and endDate as strings
   // INSERT INTO Requests VALUES (EmployeeID, StartDate, EndDate, 2);
 
@@ -47,6 +50,7 @@ export class RequestsService {
     const requestID = pendingRequest.Id;
     return requestID;
   }
+
   // SQL Query to update
   // UPDATE Requests SET Status = $statusCode WHERE Id = $requestID;
 
