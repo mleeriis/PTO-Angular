@@ -14,9 +14,9 @@
   <tr *ngFor="let request of pendingRequests; let i = index">
       <td>{{ request.EmployeeName }}
       </td>
-      <td>{{ request.StartDate }}
+      <td>{{ request.StartDate.toDateString() }}
       </td>
-      <td>{{ request.EndDate }}
+      <td>{{ request.EndDate.toDateString() }}
       </td>
       <td>
           <button class="btn btn-success" (click)="onProcessRequest(request, i, 'approve')">Approve</button>
@@ -40,9 +40,9 @@
     <tr *ngFor="let request of approvedRequests">
       <td>{{ request.EmployeeName }}
       </td>
-      <td>{{ request.StartDate }}
+      <td>{{ request.StartDate.toDateString() }}
       </td>
-      <td>{{ request.EndDate }}
+      <td>{{ request.EndDate.toDateString() }}
       </td>
     </tr>
   </tbody>
@@ -61,9 +61,9 @@
     <tr *ngFor="let request of deniedRequests">
       <td>{{ request.EmployeeName }}
       </td>
-      <td>{{ request.StartDate }}
+      <td>{{ request.StartDate.toDateString() }}
       </td>
-      <td>{{ request.EndDate }}
+      <td>{{ request.EndDate.toDateString() }}
       </td>
     </tr>
   </tbody>

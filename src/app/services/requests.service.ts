@@ -3,6 +3,7 @@ import {EventEmitter} from '@angular/core';
 
 export class RequestsService {
   requestsUpdated = new EventEmitter<PTORequest[]>();
+  currentEmployeeRequests: PTORequest[] = [];
 
 
   private PTORequests: PTORequest[] = [
@@ -20,19 +21,21 @@ export class RequestsService {
   }
 
   getCurrentUsersRequests(employeeID: number) {
-    const currentEmployeeRequests: PTORequest[] = [];
+    const currentRequests: PTORequest[] = []
     for (const aRequest of this.PTORequests) {
-      if (aRequest[1] === employeeID) {
-        currentEmployeeRequests.push(aRequest);
+      if (aRequest.EmployeeId === employeeID) {
+        currentRequests.push(aRequest);
       }
     }
-    return currentEmployeeRequests;
+    this.currentEmployeeRequests = currentRequests;
+    return this.currentEmployeeRequests;
   }
 
   makeRequest(newRequest: PTORequest) {
     this.PTORequests.push(newRequest);
  //   this.calculateTime(newRequest.StartDate, newRequest.EndDate);
-    this.requestsUpdated.emit(this.PTORequests.slice());
+    this.currentEmployeeRequests.push(newRequest);
+    this.requestsUpdated.emit(this.currentEmployeeRequests.slice());
   }
 
   // SQL Query to Insert New Request

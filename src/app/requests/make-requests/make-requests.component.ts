@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {PTORequest} from '../../shared/pto-request.model';
 import {RequestsService} from '../../services/requests.service';
 import {NgForm} from '@angular/forms';
+import {AuthService} from '../../auth.service';
 
 @Component({
   selector: 'app-make-requests',
@@ -20,7 +21,7 @@ export class MakeRequestsComponent implements OnInit {
   currentDate: Date = new Date();
   currentDateString: string = this.currentDate.toISOString().substr(0, 10);
 
-  constructor(private requestsService: RequestsService, private router: Router) {
+  constructor(private requestsService: RequestsService, private router: Router, private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -37,7 +38,7 @@ export class MakeRequestsComponent implements OnInit {
     } else if (endDate.getTime() < startDate.getTime()) {
       this.errorMessage = 'End Date cannot be before Start Date';
     } else {
-      const newRequest = new PTORequest(1, 2, 'Maria Lee', startDate, endDate, 2);
+      const newRequest = new PTORequest(1, this.authService.employeeId, this.authService.employeeName, startDate, endDate, 2);
       this.requestsService.makeRequest(newRequest);
       this.router.navigate(['/view-requests']);
     }
