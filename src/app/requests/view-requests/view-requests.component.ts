@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PTORequest} from '../../shared/pto-request.model';
 import {RequestsService} from '../../services/requests.service';
-import {AuthService} from '../../auth.service';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-view-requests',

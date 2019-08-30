@@ -7,7 +7,7 @@ import {HrViewComponent} from './hr-view/hr-view.component';
 import {AddEmployeeComponent} from './add-employee/add-employee.component';
 import {CompanyHolidayComponent} from './company-holiday/company-holiday.component';
 import {LoginComponent} from './login/login.component';
-import {AuthGuard} from './auth-guard.service';
+import {AuthGuard} from './services/auth-guard.service';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
 

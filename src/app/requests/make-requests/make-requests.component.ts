@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import {PTORequest} from '../../shared/pto-request.model';
 import {RequestsService} from '../../services/requests.service';
 import {NgForm} from '@angular/forms';
-import {AuthService} from '../../auth.service';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-make-requests',
