@@ -27,7 +27,7 @@ export class MakeRequestsComponent implements OnInit {
   }
 
   onMakeRequest() {
-    const startDate = this.convertHTMLToDate(Date(this.createRequest.value.startDate));
+    const startDate = this.convertHTMLToDate(this.createRequest.value.startDate);
     const endDate = this.convertHTMLToDate(this.createRequest.value.endDate);
 
     if (startDate.toDateString() === this.currentDate.toDateString()) {
