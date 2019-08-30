@@ -5,7 +5,6 @@ import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {ViewRequestsComponent} from './requests/view-requests/view-requests.component';
 import {MakeRequestsComponent} from './requests/make-requests/make-requests.component';
-import {EmployeeViewComponent} from './employee-view/employee-view.component';
 import {HrViewComponent} from './hr-view/hr-view.component';
 import {FormsModule} from '@angular/forms';
 import {DropdownDirective} from './shared/dropdown.directive';
@@ -23,7 +22,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     HeaderComponent,
     ViewRequestsComponent,
     MakeRequestsComponent,
-    EmployeeViewComponent,
     HrViewComponent,
     DropdownDirective,
     AddEmployeeComponent,
