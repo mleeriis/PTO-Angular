@@ -8,16 +8,18 @@ import {AddEmployeeComponent} from './add-employee/add-employee.component';
 import {CompanyHolidayComponent} from './company-holiday/company-holiday.component';
 import {LoginComponent} from './login/login.component';
 import {AuthGuard} from './auth-guard.service';
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full'},
-  { path: 'make-requests', component: MakeRequestsComponent},
+  { path: '', redirectTo: 'view-requests', pathMatch: 'full'},
+  { path: 'make-requests', canActivate: [AuthGuard], component: MakeRequestsComponent},
   {path: 'view-requests', canActivate: [AuthGuard], component: ViewRequestsComponent},
-  {path: 'hr', component: HrViewComponent},
-  {path: 'add-employee', component: AddEmployeeComponent},
-  {path: 'company-holidays', component: CompanyHolidayComponent},
-  {path: 'login', component: LoginComponent}
+  {path: 'hr', canActivate: [AuthGuard], component: HrViewComponent},
+  {path: 'add-employee', canActivate: [AuthGuard], component: AddEmployeeComponent},
+  {path: 'company-holidays', canActivate: [AuthGuard], component: CompanyHolidayComponent},
+  {path: 'login', component: LoginComponent},
+  {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({

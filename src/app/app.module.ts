@@ -17,6 +17,7 @@ import { LoginComponent } from './login/login.component';
 import {AppRoutingModule} from './app-routing.module';
 import {AuthGuard} from './auth-guard.service';
 import {AuthService} from './auth.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {AuthService} from './auth.service';
     DropdownDirective,
     AddEmployeeComponent,
     CompanyHolidayComponent,
-    LoginComponent
+    LoginComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

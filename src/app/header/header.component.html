@@ -5,12 +5,12 @@
         <a class="navbar-brand" routerLink="/">Riis</a>
       </div>
 
-      <div class="collapse navbar-collapse">
+      <div class="collapse navbar-collapse" *ngIf="isLoggedIn()">
         <ul class="nav navbar-nav">
           <li routerLinkActive="active"><a routerLink="/company-holidays">View Company Holidays</a></li>
           <li routerLinkActive="active"><a routerLink="/view-requests">View Requests</a></li>
           <li routerLinkActive="active"><a routerLink="/make-requests">Make Requests</a></li>
-          <li class="dropdown" appDropdown routerLinkActive="active">
+          <li class="dropdown" appDropdown routerLinkActive="active" *ngIf="isHR()">
             <a class="dropdown-toggle" role="button">HR Actions <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a routerLink="/hr">Approve/Deny Requests</a></li>
@@ -19,7 +19,7 @@
           </li>
 
         </ul>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right" *ngIf="isLoggedIn()">
           <li class="dropdown" appDropdown routerLinkActive="active">
             <a class="dropdown-toggle" role="button">User Account <span class="caret"></span></a>
             <ul class="dropdown-menu">

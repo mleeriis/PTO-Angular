@@ -14,6 +14,14 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+  isLoggedIn() {
+    return this.authService.loggedIn;
+  }
+
+  isHR() {
+    return (this.authService.employeeType === 1);
+  }
+
   onLogout() {
     this.authService.logout();
     this.router.navigate(['']);
