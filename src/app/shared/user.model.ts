@@ -8,7 +8,7 @@ export class User {
   }
 
   get token() {
-    if (!this._tokenExperation || new Date() > this._tokenExperation){
+    if (!this._tokenExperation || new Date().getTime() > this._tokenExperation) {
       return null;
     }
     return this._token;
