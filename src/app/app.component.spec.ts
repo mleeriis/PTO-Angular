@@ -1,12 +1,41 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import {HeaderComponent} from './header/header.component';
+import {ViewRequestsComponent} from './requests/view-requests/view-requests.component';
+import {MakeRequestsComponent} from './requests/make-requests/make-requests.component';
+import {HrViewComponent} from './hr-view/hr-view.component';
+import {DropdownDirective} from './shared/dropdown.directive';
+import {AddEmployeeComponent} from './add-employee/add-employee.component';
+import {CompanyHolidayComponent} from './company-holiday/company-holiday.component';
+import {LoginComponent} from './login/login.component';
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {FormsModule} from '@angular/forms';
+import {AppRoutingModule} from './app-routing.module';
+import {AuthGuard} from './services/auth-guard.service';
+import {AuthService} from './services/auth.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        HeaderComponent,
+        ViewRequestsComponent,
+        MakeRequestsComponent,
+        HrViewComponent,
+        DropdownDirective,
+        AddEmployeeComponent,
+        CompanyHolidayComponent,
+        LoginComponent,
+        PageNotFoundComponent
       ],
+      imports: [
+        BrowserModule,
+        FormsModule,
+        AppRoutingModule
+      ],
+      providers: [AuthGuard, AuthService]
     }).compileComponents();
   }));
 
@@ -14,18 +43,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'PTO-Angular'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('PTO-Angular');
-  });
-
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to PTO-Angular!');
   });
 });
