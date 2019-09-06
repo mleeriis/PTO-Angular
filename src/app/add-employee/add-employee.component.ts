@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {EmployeesService} from '../services/employees.service';
 import {Employee} from '../shared/employee.model';
 import {NgForm} from '@angular/forms';
-import {HttpService} from '../services/http.service';
 import {Observable} from 'rxjs';
 
 @Component({
