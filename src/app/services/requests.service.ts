@@ -8,13 +8,13 @@ export class RequestsService {
 
 
   private PTORequests: PTORequest[] = [
-    new PTORequest(1, 1, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 1),
-    new PTORequest(2, 1, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 2),
-    new PTORequest(3, 1, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 3),
-    new PTORequest(4, 1, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 1),
-    new PTORequest(5, 2, 'Maria Lee', new Date(2019, 8, 8), new Date(2019, 8, 9), 1),
-    new PTORequest(6, 2, 'Maria Lee', new Date(2019, 8, 8), new Date(2019, 8, 9), 2),
-    new PTORequest(7, 2, 'Maria Lee', new Date(2019, 8, 8), new Date(2019, 8, 9), 3),
+    new PTORequest(1, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 1),
+    new PTORequest(1, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 2),
+    new PTORequest(1, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 3),
+    new PTORequest(1, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 1),
+    new PTORequest(2, 'Maria Lee', new Date(2019, 8, 8), new Date(2019, 8, 9), 1),
+    new PTORequest(2, 'Maria Lee', new Date(2019, 8, 8), new Date(2019, 8, 9), 2),
+    new PTORequest(2, 'Maria Lee', new Date(2019, 8, 8), new Date(2019, 8, 9), 3),
   ];
 
   private httpOptions = {
@@ -43,27 +43,23 @@ export class RequestsService {
   }
 
   makeRequest(newRequest: PTORequest) {
-    // const startDateISOString = newRequest.StartDate.toISOString();
-    // const endDateISOString = newRequest.EndDate.toISOString();
-    const employeeID = newRequest.EmployeeId;
-
     this.PTORequests.push(newRequest);
-    //   this.calculateTime(newRequest.StartDate, newRequest.EndDate);
     this.currentEmployeeRequests.push(newRequest);
     this.requestsUpdated.emit(this.currentEmployeeRequests.slice());
   }
+
 
   // SQL Query to Insert New Request
   // INSERT INTO Requests VALUES ($employeeID, CAST('$startDateISOString' AS datetime),CAST('$endDateISOString' AS datetime), 2);
   // ^ startDate and endDate as strings
   // INSERT INTO Requests VALUES (EmployeeID, StartDate, EndDate, 2);
-  createPtoRequest(newRequest: PTORequest){
+  createPtoRequest(newRequest: PTORequest) {
     return this.http.post('http://localhost:8080/pto',
       {
-        "employeeID": newRequest.EmployeeId,
-        "startDate": newRequest.StartDate,
-        "endDate": newRequest.EndDate,
-        "status": newRequest.Status
+        'employeeID': newRequest.EmployeeId,
+        'startDate': newRequest.StartDate,
+        'endDate': newRequest.EndDate,
+        'status': newRequest.Status
       }, this.httpOptions);
   }
 

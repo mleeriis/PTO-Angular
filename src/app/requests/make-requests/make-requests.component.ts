@@ -20,8 +20,8 @@ export class MakeRequestsComponent implements OnInit {
 
   errorMessage = '';
 
-  // currentDate: Date = new Date();
-  // currentDateString: string = this.currentDate.toISOString().substr(0, 10);
+  currentDate: Date = new Date();
+  currentDateString: string = this.currentDate.toISOString().substr(0, 10);
 
   constructor(private requestsService: RequestsService, private router: Router, private authService: AuthService, private http: HttpClient) {
   }
@@ -30,35 +30,30 @@ export class MakeRequestsComponent implements OnInit {
   }
 
   onMakeRequest() {
-    const startDate = this.convertHTMLToDate(this.createRequest.value.startDate);
-    const endDate = this.convertHTMLToDate(this.createRequest.value.endDate);
+    const startDate = this.createRequest.value.startDate;
+    const endDate = this.createRequest.value.endDate;
+    //String. YYYY-MM-DD
 
-    console.log('start date: ' + startDate.toDateString());
-    console.log('start date unformatted: ' + this.createRequest.value.startDate);
-    //
     // if (startDate.toDateString() === this.currentDate.toDateString()) {
     //   this.errorMessage = 'PTO cannot start today';
-    // } else if ((startDate.getTime() || endDate.getTime()) < this.currentDate.getTime()) {
+    // }
+
+    //else if ((startDate.getTime() || endDate.getTime()) < this.currentDate.getTime()) {
     //   this.errorMessage = 'Cannot choose a date in the past';
     // } else if (endDate.getTime() < startDate.getTime()) {
     //   this.errorMessage = 'End Date cannot be before Start Date';
     // } else {
 
-    const newRequest = new PTORequest(this.authService.employeeId, this.authService.employeeName, this.createRequest.value.startDate, this.createRequest.value.endDate, 2);
+    const newRequest = new PTORequest(this.authService.employeeId, this.authService.employeeName, startDate, endDate, 2);
 
 
     const requestObs: Observable<object> = this.requestsService.createPtoRequest(newRequest);
 
     requestObs.subscribe(responseData => {
-      console.log(responseData);
       this.requestsService.makeRequest(newRequest);
       this.router.navigate(['/view-requests']);
     });
 
-  }
-
-  private convertHTMLToDate(inputDate: string) {
-    return (new Date(new Date(inputDate).toLocaleString('en-US', {timeZone: 'UTC'})));
   }
 
 }

@@ -34,4 +34,7 @@ export class ViewRequestsComponent implements OnInit {
     }
   }
 
+  private convertHTMLToDate(inputDate: string) {
+    return (new Date(new Date(inputDate).toLocaleString('en-US', {timeZone: 'UTC'}))).toString().substring(0, 16);
+  }
 }
