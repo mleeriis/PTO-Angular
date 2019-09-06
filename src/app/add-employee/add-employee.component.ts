@@ -37,7 +37,7 @@ export class AddEmployeeComponent implements OnInit {
     const newEmployee = new Employee(firstName, lastName, email, roleID, password, 120);
 
 
-    const createObs: Observable<Object> = this.employeeService.createEmployee(newEmployee);
+    const createObs: Observable<object> = this.employeeService.createEmployee(newEmployee);
 
     createObs.subscribe(responseData => {
       this.errorMessage = '';
@@ -45,7 +45,6 @@ export class AddEmployeeComponent implements OnInit {
       this.createEmployeeForm.reset();
       this.employeeService.addEmployee(newEmployee);
     }, error => {
-      console.log(error.error);
       this.successMessage = '';
       this.errorMessage = error.error.message;
     });
