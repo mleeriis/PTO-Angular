@@ -1,5 +1,5 @@
 export class PTORequest {
-  constructor(public Id: number, public EmployeeId: number, public EmployeeName: string, public StartDate: Date, public EndDate: Date, public Status: number) {}
+  constructor(public EmployeeId: number, public EmployeeName: string, public StartDate: Date, public EndDate: Date, public Status: number, public Id?: number) {}
 }
 
 // ALL Employees Requests

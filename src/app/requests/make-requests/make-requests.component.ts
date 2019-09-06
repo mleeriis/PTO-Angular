@@ -5,6 +5,8 @@ import {PTORequest} from '../../shared/pto-request.model';
 import {RequestsService} from '../../services/requests.service';
 import {NgForm} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-make-requests',
@@ -18,10 +20,10 @@ export class MakeRequestsComponent implements OnInit {
 
   errorMessage = '';
 
-  currentDate: Date = new Date();
-  currentDateString: string = this.currentDate.toISOString().substr(0, 10);
+  // currentDate: Date = new Date();
+  // currentDateString: string = this.currentDate.toISOString().substr(0, 10);
 
-  constructor(private requestsService: RequestsService, private router: Router, private authService: AuthService) {
+  constructor(private requestsService: RequestsService, private router: Router, private authService: AuthService, private http: HttpClient) {
   }
 
   ngOnInit() {
@@ -31,17 +33,28 @@ export class MakeRequestsComponent implements OnInit {
     const startDate = this.convertHTMLToDate(this.createRequest.value.startDate);
     const endDate = this.convertHTMLToDate(this.createRequest.value.endDate);
 
-    if (startDate.toDateString() === this.currentDate.toDateString()) {
-      this.errorMessage = 'PTO cannot start today';
-    } else if ((startDate.getTime() || endDate.getTime()) < this.currentDate.getTime()) {
-      this.errorMessage = 'Cannot choose a date in the past';
-    } else if (endDate.getTime() < startDate.getTime()) {
-      this.errorMessage = 'End Date cannot be before Start Date';
-    } else {
-      const newRequest = new PTORequest(1, this.authService.employeeId, this.authService.employeeName, startDate, endDate, 2);
+    console.log('start date: ' + startDate.toDateString());
+    console.log('start date unformatted: ' + this.createRequest.value.startDate);
+    //
+    // if (startDate.toDateString() === this.currentDate.toDateString()) {
+    //   this.errorMessage = 'PTO cannot start today';
+    // } else if ((startDate.getTime() || endDate.getTime()) < this.currentDate.getTime()) {
+    //   this.errorMessage = 'Cannot choose a date in the past';
+    // } else if (endDate.getTime() < startDate.getTime()) {
+    //   this.errorMessage = 'End Date cannot be before Start Date';
+    // } else {
+
+    const newRequest = new PTORequest(this.authService.employeeId, this.authService.employeeName, this.createRequest.value.startDate, this.createRequest.value.endDate, 2);
+
+
+    const requestObs: Observable<object> = this.requestsService.createPtoRequest(newRequest);
+
+    requestObs.subscribe(responseData => {
+      console.log(responseData);
       this.requestsService.makeRequest(newRequest);
       this.router.navigate(['/view-requests']);
-    }
+    });
+
   }
 
   private convertHTMLToDate(inputDate: string) {

@@ -10,8 +10,8 @@
   <tbody>
     <tr *ngFor="let eachRequest of currentEmployeeRequests"
         [ngClass]="{'success': eachRequest.Status === 1, 'danger': eachRequest.Status === 3}">
-      <td>{{eachRequest.StartDate.toDateString()}}</td>
-      <td>{{eachRequest.EndDate.toDateString()}}</td>
+      <td>{{eachRequest.StartDate}}</td>
+      <td>{{eachRequest.EndDate}}</td>
       <td>{{displayStatusAsString(eachRequest.Status)}}</td>
       <td>
         <button class="btn btn-danger">Cancel Request</button>

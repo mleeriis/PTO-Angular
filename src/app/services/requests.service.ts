@@ -1,5 +1,6 @@
 import {PTORequest} from '../shared/pto-request.model';
 import {EventEmitter} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 export class RequestsService {
   requestsUpdated = new EventEmitter<PTORequest[]>();
@@ -15,6 +16,16 @@ export class RequestsService {
     new PTORequest(6, 2, 'Maria Lee', new Date(2019, 8, 8), new Date(2019, 8, 9), 2),
     new PTORequest(7, 2, 'Maria Lee', new Date(2019, 8, 8), new Date(2019, 8, 9), 3),
   ];
+
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    })
+  };
+
+  constructor(private http: HttpClient) {
+  }
 
   getPTORequests() {
     return this.PTORequests.slice();
@@ -32,8 +43,8 @@ export class RequestsService {
   }
 
   makeRequest(newRequest: PTORequest) {
-    const startDateISOString = newRequest.StartDate.toISOString();
-    const endDateISOString = newRequest.EndDate.toISOString();
+    // const startDateISOString = newRequest.StartDate.toISOString();
+    // const endDateISOString = newRequest.EndDate.toISOString();
     const employeeID = newRequest.EmployeeId;
 
     this.PTORequests.push(newRequest);
@@ -41,10 +52,21 @@ export class RequestsService {
     this.currentEmployeeRequests.push(newRequest);
     this.requestsUpdated.emit(this.currentEmployeeRequests.slice());
   }
+
   // SQL Query to Insert New Request
   // INSERT INTO Requests VALUES ($employeeID, CAST('$startDateISOString' AS datetime),CAST('$endDateISOString' AS datetime), 2);
   // ^ startDate and endDate as strings
   // INSERT INTO Requests VALUES (EmployeeID, StartDate, EndDate, 2);
+  createPtoRequest(newRequest: PTORequest){
+    return this.http.post('http://localhost:8080/pto',
+      {
+        "employeeID": newRequest.EmployeeId,
+        "startDate": newRequest.StartDate,
+        "endDate": newRequest.EndDate,
+        "status": newRequest.Status
+      }, this.httpOptions);
+  }
+
 
   processRequest(pendingRequest: PTORequest, statusCode: number) {
     const requestID = pendingRequest.Id;
