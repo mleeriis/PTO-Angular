@@ -5,7 +5,7 @@ export class Employee {
     public email: string,
     public RoleID: number,
     public password: string,
-    public balance: number,
+    public balance?: number,
     public Id?: number) {
   }
 }
