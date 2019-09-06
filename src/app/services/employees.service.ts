@@ -29,7 +29,6 @@ export class EmployeesService {
     this.employeesUpdated.emit(this.allEmployees.slice());
 
     this.http.post('http://localhost:8080/employees', {
-
       'firstname': newEmployee.Firstname,
       'lastname': newEmployee.Lastname,
       'email': newEmployee.email,
