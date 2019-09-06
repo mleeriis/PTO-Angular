@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
     const password = this.loginForm.value.password;
 
     this.authService.authenticate(email, password, () => {
+      this.authService.getData(email);
       this.router.navigate(['/view-requests']);
     }, () => {
       this.errorMessage = 'Incorrect email or password';

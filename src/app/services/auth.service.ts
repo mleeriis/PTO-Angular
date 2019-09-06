@@ -48,4 +48,13 @@ export class AuthService {
     this.loggedIn = false;
   }
 
+  getData(email: string) {
+    this.http.get<{ id: number, firstname: string, lastname: string, email: string, roleID: number }>('http://localhost:8080/employees/' + email).subscribe(responseData => {
+      this.employeeId = responseData.id;
+      this.employeeType = responseData.roleID;
+      this.employeeName = responseData.firstname + ' ' + responseData.lastname;
+    });
+  }
+
+
 }
