@@ -39,7 +39,7 @@ export class RequestsService {
           const ptoArray: PTOInterface[] = [];
           for (const key in responseData) {
             if (responseData.hasOwnProperty(key)) {
-              ptoArray.push({...responseData[key], id: key});
+              ptoArray.push({...responseData[key], arrayLocation: key});
             }
           }
           return ptoArray;
@@ -82,9 +82,12 @@ export class RequestsService {
   }
 
 
-  processRequest(pendingRequest: PTOInterface, statusCode: number) {
-    const requestID = pendingRequest.id;
-    return requestID;
+  processRequest(pendingRequestID: number, statusCode: number) {
+    return this.http.put('http://localhost:8080/pto/' + pendingRequestID,
+      {
+        'status': statusCode
+      },
+      this.httpOptions);
   }
 
   // SQL Query to update

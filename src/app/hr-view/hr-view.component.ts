@@ -24,16 +24,18 @@ export class HrViewComponent implements OnInit {
   }
 
   onProcessRequest(pendingRequest: PTOInterface, arrayIndex: number, change: string) {
+    let statusCode: number;
     if (change === 'approve') {
       pendingRequest.status = 1;
-      this.requestsService.processRequest(pendingRequest, 1);
+      statusCode = 1;
       this.approvedRequests.push(pendingRequest);
     } else {
       pendingRequest.status = 3;
-      this.requestsService.processRequest(pendingRequest, 3);
+      statusCode = 3;
       this.deniedRequests.push(pendingRequest);
     }
     this.pendingRequests.splice(arrayIndex, 1);
+    this.requestsService.processRequest(pendingRequest.id, statusCode).subscribe();
   }
 
   private sortRequests() {
