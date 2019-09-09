@@ -3,5 +3,5 @@ export interface PTOInterface {
   startDate: string;
   endDate: string;
   status: number;
-  id: number;
+  id?: number;
 }

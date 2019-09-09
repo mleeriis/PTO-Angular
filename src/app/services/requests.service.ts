@@ -1,13 +1,11 @@
-import {PTORequest} from '../shared/pto-request.model';
 import {EventEmitter} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {PTOInterface} from '../shared/pto-interface';
-import {catchError, map, tap} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 import {throwError} from 'rxjs';
 
 export class RequestsService {
   requestsUpdated = new EventEmitter<PTOInterface[]>();
-  currentEmployeeRequests: PTOInterface[] = [];
 
   ptoInterface: PTOInterface[];
 
@@ -57,24 +55,13 @@ export class RequestsService {
       );
   }
 
-  makeRequest(newRequest: PTOInterface) {
-    this.ptoInterface.push(newRequest);
-    // this.currentEmployeeRequests.push(newRequest);
-    // this.requestsUpdated.emit(this.currentEmployeeRequests.slice());
-  }
-
   // SQL Query to Insert New Request
   // INSERT INTO Requests VALUES ($employeeID, CAST('$startDateISOString' AS datetime),CAST('$endDateISOString' AS datetime), 2);
   // ^ startDate and endDate as strings
   // INSERT INTO Requests VALUES (EmployeeID, StartDate, EndDate, 2);
-  createPtoRequest(newRequest: PTORequest) {
+  createPtoRequest(newRequest: PTOInterface) {
     return this.http.post('http://localhost:8080/pto',
-      {
-        'employeeID': newRequest.EmployeeId,
-        'startDate': newRequest.StartDate,
-        'endDate': newRequest.EndDate,
-        'status': newRequest.Status
-      }, this.httpOptions);
+      newRequest, this.httpOptions);
   }
 
 

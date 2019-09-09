@@ -5,8 +5,7 @@ import {PTORequest} from '../../shared/pto-request.model';
 import {RequestsService} from '../../services/requests.service';
 import {NgForm} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {PTOInterface} from '../../shared/pto-interface';
 
 @Component({
   selector: 'app-make-requests',
@@ -23,7 +22,7 @@ export class MakeRequestsComponent implements OnInit {
   currentDate: Date = new Date();
   currentDateString: string = this.currentDate.toISOString().substr(0, 10);
 
-  constructor(private requestsService: RequestsService, private router: Router, private authService: AuthService, private http: HttpClient) {
+  constructor(private requestsService: RequestsService, private router: Router, private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -34,6 +33,19 @@ export class MakeRequestsComponent implements OnInit {
     const endDate = this.createRequest.value.endDate;
     //String. YYYY-MM-DD
 
+    const newRequest: PTOInterface = {
+      employeeID: this.authService.employeeId,
+      startDate: startDate,
+      endDate: endDate,
+      status: 2
+    };
+
+    this.requestsService.createPtoRequest(newRequest).subscribe(() => {
+      this.router.navigate(['/view-requests']), errorRes => {
+        console.log(errorRes);
+      };
+    });
+
     // if (startDate.toDateString() === this.currentDate.toDateString()) {
     //   this.errorMessage = 'PTO cannot start today';
     // }
@@ -43,18 +55,6 @@ export class MakeRequestsComponent implements OnInit {
     // } else if (endDate.getTime() < startDate.getTime()) {
     //   this.errorMessage = 'End Date cannot be before Start Date';
     // } else {
-
-    const newRequest = new PTORequest(this.authService.employeeId, this.authService.employeeName, startDate, endDate, 2);
-
-
-    const requestObs: Observable<object> = this.requestsService.createPtoRequest(newRequest);
-
-    requestObs.subscribe(responseData => {
-      this.requestsService.makeRequest(newRequest);
-      // TODO: Fix redirect
-      this.router.navigate(['/view-requests']);
-    });
-
   }
 
 }
