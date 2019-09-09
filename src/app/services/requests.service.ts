@@ -8,8 +8,8 @@ export class RequestsService {
 
 
   private PTORequests: PTORequest[] = [
-    new PTORequest(37, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 1, 68),
-    new PTORequest(37, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 2, 69),
+    new PTORequest(37, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 1, 70),
+    new PTORequest(37, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 2, 71),
     new PTORequest(1, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 3),
     new PTORequest(1, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 1),
     new PTORequest(2, 'Maria Lee', new Date(2019, 8, 8), new Date(2019, 8, 9), 1),
@@ -73,6 +73,11 @@ export class RequestsService {
 
   deleteRequest(id: number) {
     return this.http.delete('http://localhost:8080/pto/' + id, this.httpOptions);
+  }
+
+  updateRequestArray(arrayIndex: number){
+    this.PTORequests.splice(arrayIndex, 1)
+    this.requestsUpdated.emit(this.PTORequests.slice());
   }
 
   /*

@@ -38,9 +38,13 @@ export class ViewRequestsComponent implements OnInit {
     return (new Date(new Date(inputDate).toLocaleString('en-US', {timeZone: 'UTC'}))).toString().substring(0, 16);
   }
 
-  private onDelete(id: number) {
-    const requestSub = this.requestsService.deleteRequest(id).subscribe((responseData) => {console.log(responseData);});
+  private onDelete(id: number, arrayIndex: number) {
+    const requestSub = this.requestsService.deleteRequest(id).subscribe((responseData) => {
+      console.log(responseData);
+    });
 
-   // requestSub.unsubscribe();
+    this.requestsService.updateRequestArray(arrayIndex);
+
+    // requestSub.unsubscribe();
   }
 }
