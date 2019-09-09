@@ -41,9 +41,9 @@ export class MakeRequestsComponent implements OnInit {
     };
 
     this.requestsService.createPtoRequest(newRequest).subscribe(() => {
-      this.router.navigate(['/view-requests']), errorRes => {
-        console.log(errorRes);
-      };
+      this.router.navigate(['/view-requests']);
+    }, errorRes => {
+      this.errorMessage = errorRes;
     });
 
     // if (startDate.toDateString() === this.currentDate.toDateString()) {
