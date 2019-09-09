@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {log} from 'util';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +10,7 @@ import {log} from 'util';
 })
 export class LoginComponent implements OnInit {
   @ViewChild('loginForm', {static: true}) loginForm: NgForm;
-  errorMessage: string;
+  errorMessage = '';
 
   constructor(private authService: AuthService, private router: Router) {
   }
@@ -26,9 +25,12 @@ export class LoginComponent implements OnInit {
     this.authService.authenticate(email, password, () => {
       this.authService.getData(email);
       this.router.navigate(['/view-requests']);
-    }, () => {
-      this.errorMessage = 'Incorrect email or password';
+    }, (error) => {
+      if (error.status === 0) {
+        this.errorMessage = 'Server is down. Please try again later.';
+      } else {
+        this.errorMessage = 'Incorrect username or password';
+      }
     });
   }
-
 }

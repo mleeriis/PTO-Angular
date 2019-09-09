@@ -20,7 +20,6 @@ export class AuthService {
       (resolve, reject) => {
         setTimeout(() => {
           resolve(this.loggedIn);
-
         }, 800);
       });
 
@@ -33,13 +32,13 @@ export class AuthService {
         'email': email,
         'password': password
       }, this.httpOptions).subscribe(
-      responseData => {
-        this.loggedIn = !responseData;
+      () => {
+        this.loggedIn = true;
         return callback && callback();
       },
-      errorMessage => {
+      error => {
         this.loggedIn = false;
-        return errorCallback && errorCallback();
+        return errorCallback && errorCallback(error);
       }
     );
   }

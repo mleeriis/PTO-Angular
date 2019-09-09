@@ -1,27 +1,27 @@
 <form (ngSubmit)="onLogin()" #loginForm="ngForm">
   <div class="form-group" [ngClass]="{'has-error': (emailInput.invalid && emailInput.touched)}">
     <label>email
-    <input
-      type="email"
-      class="form-control"
-      name="email"
-      required
-      email
-      ngModel
-      #emailInput="ngModel"></label>
+      <input
+        type="email"
+        class="form-control"
+        name="email"
+        required
+        email
+        ngModel
+        #emailInput="ngModel"></label>
     <span class="help-block" *ngIf="emailInput.invalid && emailInput.touched">Please enter a valid email</span>
   </div>
   <div class="form-group" [ngClass]="{'has-error': (passwordInput.invalid && passwordInput.touched)}">
     <label>Password
-    <input
-      type="password"
-      class="form-control"
-      name="password"
-      required
-      ngModel
-      #passwordInput="ngModel"></label>
+      <input
+        type="password"
+        class="form-control"
+        name="password"
+        required
+        ngModel
+        #passwordInput="ngModel"></label>
     <span class="help-block" *ngIf="passwordInput.invalid && passwordInput.touched">Password cannot be blank</span>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-<h2>{{errorMessage}}</h2>
+<div class="alert" [ngClass]="{'alert-danger': errorMessage.length > 0}">{{ errorMessage }}</div>

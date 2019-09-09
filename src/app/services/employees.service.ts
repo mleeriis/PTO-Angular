@@ -28,7 +28,7 @@ export class EmployeesService {
           return employeeArray;
         }),
         catchError(errorRes => {
-          return throwError(errorRes);
+          return throwError(errorRes.message);
         })
       );
   }

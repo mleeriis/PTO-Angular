@@ -28,7 +28,7 @@ export class RequestsService {
           return ptoArray;
         }),
         catchError(errorRes => {
-          return throwError(errorRes);
+          return throwError(errorRes.message);
         })
       );
   }
@@ -46,7 +46,7 @@ export class RequestsService {
           return ptoArray;
         }),
         catchError(errorRes => {
-          return throwError(errorRes);
+          return throwError(errorRes.message);
         })
       );
   }
