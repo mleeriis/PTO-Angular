@@ -14,7 +14,7 @@
       <td>{{convertHTMLToDate(eachRequest.EndDate.toString())}}</td>
       <td>{{displayStatusAsString(eachRequest.Status)}}</td>
       <td>
-        <button class="btn btn-danger">Cancel Request</button>
+        <button class="btn btn-danger" (click)="onDelete(eachRequest.Id)">Cancel Request</button>
       </td>
     </tr>
   </tbody>

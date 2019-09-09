@@ -8,8 +8,8 @@ export class RequestsService {
 
 
   private PTORequests: PTORequest[] = [
-    new PTORequest(1, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 1),
-    new PTORequest(1, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 2),
+    new PTORequest(37, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 1, 68),
+    new PTORequest(37, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 2, 69),
     new PTORequest(1, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 3),
     new PTORequest(1, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 1),
     new PTORequest(2, 'Maria Lee', new Date(2019, 8, 8), new Date(2019, 8, 9), 1),
@@ -48,7 +48,6 @@ export class RequestsService {
     this.requestsUpdated.emit(this.currentEmployeeRequests.slice());
   }
 
-
   // SQL Query to Insert New Request
   // INSERT INTO Requests VALUES ($employeeID, CAST('$startDateISOString' AS datetime),CAST('$endDateISOString' AS datetime), 2);
   // ^ startDate and endDate as strings
@@ -71,6 +70,10 @@ export class RequestsService {
 
   // SQL Query to update
   // UPDATE Requests SET Status = $statusCode WHERE Id = $requestID;
+
+  deleteRequest(id: number) {
+    return this.http.delete('http://localhost:8080/pto/' + id, this.httpOptions);
+  }
 
   /*
   calculateTime(startDate: Date, endDate: Date) {
