@@ -39,9 +39,7 @@ export class HrViewComponent implements OnInit {
   }
 
   private sortRequests() {
-    console.log(this.allRequests);
     for (const entry of this.allRequests) {
-      console.log(entry);
       switch (entry.status) {
         case 1:
           this.approvedRequests.push(entry);
@@ -62,5 +60,3 @@ export class HrViewComponent implements OnInit {
     return (new Date(new Date(inputDate).toLocaleString('en-US', {timeZone: 'UTC'}))).toString().substring(0, 16);
   }
 }
-
-
