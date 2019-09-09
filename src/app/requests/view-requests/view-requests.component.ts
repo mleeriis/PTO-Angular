@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PTORequest} from '../../shared/pto-request.model';
 import {RequestsService} from '../../services/requests.service';
 import {AuthService} from '../../services/auth.service';
+import {PTOInterface} from '../../shared/pto-interface';
 
 @Component({
   selector: 'app-view-requests',
@@ -10,12 +11,17 @@ import {AuthService} from '../../services/auth.service';
 })
 export class ViewRequestsComponent implements OnInit {
   currentEmployeeRequests: PTORequest[];
+  currentRequests: PTOInterface[] = [];
 
   constructor(private requestsService: RequestsService, private authService: AuthService) {
   }
 
   ngOnInit() {
-    this.currentEmployeeRequests = this.requestsService.getCurrentUsersRequests(this.authService.employeeId);
+    this.requestsService.getCurrentUsersRequests().subscribe(ptoRequests => {
+      this.currentRequests = ptoRequests;
+    });
+
+    // this.currentEmployeeRequests = this.requestsService.getCurrentUsersRequests(this.authService.employeeId);
     this.requestsService.requestsUpdated.subscribe((newRequests: PTORequest[]) => {
       this.currentEmployeeRequests = newRequests;
     });
@@ -46,5 +52,11 @@ export class ViewRequestsComponent implements OnInit {
     this.requestsService.updateRequestArray(arrayIndex);
 
     // requestSub.unsubscribe();
+  }
+
+  private getAllRequests() {
+    this.requestsService.getCurrentUsersRequests().subscribe(ptoRequests => {
+      this.currentRequests = ptoRequests;
+    });
   }
 }

@@ -8,13 +8,13 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let eachRequest of currentEmployeeRequests; let i = index;"
-        [ngClass]="{'success': eachRequest.Status === 1, 'danger': eachRequest.Status === 3}">
-      <td>{{convertHTMLToDate(eachRequest.StartDate.toString())}}</td>
-      <td>{{convertHTMLToDate(eachRequest.EndDate.toString())}}</td>
-      <td>{{displayStatusAsString(eachRequest.Status)}}</td>
+    <tr *ngFor="let eachRequest of currentRequests; let i = index;"
+        [ngClass]="{'success': eachRequest.status === 1, 'danger': eachRequest.status === 3}">
+      <td>{{convertHTMLToDate(eachRequest.startDate.toString())}}</td>
+      <td>{{convertHTMLToDate(eachRequest.endDate.toString())}}</td>
+      <td>{{displayStatusAsString(eachRequest.status)}}</td>
       <td>
-        <button class="btn btn-danger" (click)="onDelete(eachRequest.Id, i)">Cancel Request</button>
+        <button class="btn btn-danger" (click)="onDelete(eachRequest.id, i)">Cancel Request</button>
       </td>
     </tr>
   </tbody>

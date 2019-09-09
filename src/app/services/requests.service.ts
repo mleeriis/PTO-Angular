@@ -1,10 +1,14 @@
 import {PTORequest} from '../shared/pto-request.model';
 import {EventEmitter} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {PTOInterface} from '../shared/pto-interface';
+import {map} from 'rxjs/operators';
 
 export class RequestsService {
   requestsUpdated = new EventEmitter<PTORequest[]>();
   currentEmployeeRequests: PTORequest[] = [];
+
+  ptoInterface: PTOInterface[];
 
 
   private PTORequests: PTORequest[] = [
@@ -31,15 +35,28 @@ export class RequestsService {
     return this.PTORequests.slice();
   }
 
-  getCurrentUsersRequests(employeeID: number) {
-    const currentRequests: PTORequest[] = [];
-    for (const aRequest of this.PTORequests) {
-      if (aRequest.EmployeeId === employeeID) {
-        currentRequests.push(aRequest);
-      }
-    }
-    this.currentEmployeeRequests = currentRequests;
-    return this.currentEmployeeRequests;
+  getCurrentUsersRequests() {
+    return this.http.get('http://localhost:8080/pto?page=0&limit=25', this.httpOptions)
+      .pipe(
+      map(responseData => {
+        const ptoArray: PTOInterface[] = [];
+        for (const key in responseData){
+          if (responseData.hasOwnProperty(key)){
+            ptoArray.push({ ...responseData[key], id: key});
+          }
+        }
+        return ptoArray;
+      })
+      );
+
+    // const currentRequests: PTORequest[] = [];
+    // for (const aRequest of this.PTORequests) {
+    //   if (aRequest.EmployeeId === employeeID) {
+    //     currentRequests.push(aRequest);
+    //   }
+    // }
+    // this.currentEmployeeRequests = currentRequests;
+    // return this.currentEmployeeRequests;
   }
 
   makeRequest(newRequest: PTORequest) {
@@ -75,8 +92,8 @@ export class RequestsService {
     return this.http.delete('http://localhost:8080/pto/' + id, this.httpOptions);
   }
 
-  updateRequestArray(arrayIndex: number){
-    this.PTORequests.splice(arrayIndex, 1)
+  updateRequestArray(arrayIndex: number) {
+    this.PTORequests.splice(arrayIndex, 1);
     this.requestsUpdated.emit(this.PTORequests.slice());
   }
 
