@@ -51,6 +51,7 @@ export class MakeRequestsComponent implements OnInit {
 
     requestObs.subscribe(responseData => {
       this.requestsService.makeRequest(newRequest);
+      // TODO: Fix redirect
       this.router.navigate(['/view-requests']);
     });
 

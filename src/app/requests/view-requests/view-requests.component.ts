@@ -17,9 +17,9 @@ export class ViewRequestsComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.requestsService.getCurrentUsersRequests().subscribe(ptoRequests => {
-    //   this.currentRequests = ptoRequests;
-    // });
+    this.requestsService.getCurrentUsersRequests(this.authService.employeeId).subscribe(ptoRequests => {
+      this.currentRequests = ptoRequests;
+    });
 
     // this.currentEmployeeRequests = this.requestsService.getCurrentUsersRequests(this.authService.employeeId);
     this.requestsService.requestsUpdated.subscribe((newRequests: PTORequest[]) => {
@@ -52,11 +52,5 @@ export class ViewRequestsComponent implements OnInit {
     this.requestsService.updateRequestArray(arrayIndex);
 
     // requestSub.unsubscribe();
-  }
-
-  private getAllRequests() {
-    this.requestsService.getCurrentUsersRequests().subscribe(ptoRequests => {
-      this.currentRequests = ptoRequests;
-    });
   }
 }

@@ -6,21 +6,10 @@ import {catchError, map, tap} from 'rxjs/operators';
 import {throwError} from 'rxjs';
 
 export class RequestsService {
-  requestsUpdated = new EventEmitter<PTORequest[]>();
-  currentEmployeeRequests: PTORequest[] = [];
+  requestsUpdated = new EventEmitter<PTOInterface[]>();
+  currentEmployeeRequests: PTOInterface[] = [];
 
   ptoInterface: PTOInterface[];
-
-
-  private PTORequests: PTORequest[] = [
-    new PTORequest(37, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 1, 70),
-    new PTORequest(37, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 2, 71),
-    new PTORequest(1, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 3),
-    new PTORequest(1, 'Jillian Marcotte', new Date(2019, 8, 8), new Date(2019, 8, 9), 1),
-    new PTORequest(2, 'Maria Lee', new Date(2019, 8, 8), new Date(2019, 8, 9), 1),
-    new PTORequest(2, 'Maria Lee', new Date(2019, 8, 8), new Date(2019, 8, 9), 2),
-    new PTORequest(2, 'Maria Lee', new Date(2019, 8, 8), new Date(2019, 8, 9), 3),
-  ];
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -39,7 +28,7 @@ export class RequestsService {
           const ptoArray: PTOInterface[] = [];
           for (const key in responseData) {
             if (responseData.hasOwnProperty(key)) {
-              ptoArray.push({...responseData[key], arrayLocation: key});
+              ptoArray.push({...responseData[key], arrayIndex: key});
             }
           }
           return ptoArray;
@@ -50,21 +39,28 @@ export class RequestsService {
       );
   }
 
-  getCurrentUsersRequests() {
-    // const currentRequests: PTORequest[] = [];
-    // for (const aRequest of this.PTORequests) {
-    //   if (aRequest.EmployeeId === employeeID) {
-    //     currentRequests.push(aRequest);
-    //   }
-    // }
-    // this.currentEmployeeRequests = currentRequests;
-    // return this.currentEmployeeRequests;
+  getCurrentUsersRequests(employeeID: number) {
+    return this.http.get('http://localhost:8080/pto?page=0&limit=25&empID=' + employeeID, this.httpOptions)
+      .pipe(
+        map(responseData => {
+          const ptoArray: PTOInterface[] = [];
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              ptoArray.push({...responseData[key], arrayIndex: key});
+            }
+          }
+          return ptoArray;
+        }),
+        catchError(errorRes => {
+          return throwError(errorRes);
+        })
+      );
   }
 
-  makeRequest(newRequest: PTORequest) {
-    this.PTORequests.push(newRequest);
-    this.currentEmployeeRequests.push(newRequest);
-    this.requestsUpdated.emit(this.currentEmployeeRequests.slice());
+  makeRequest(newRequest: PTOInterface) {
+    this.ptoInterface.push(newRequest);
+    // this.currentEmployeeRequests.push(newRequest);
+    // this.requestsUpdated.emit(this.currentEmployeeRequests.slice());
   }
 
   // SQL Query to Insert New Request
@@ -98,8 +94,8 @@ export class RequestsService {
   }
 
   updateRequestArray(arrayIndex: number) {
-    this.PTORequests.splice(arrayIndex, 1);
-    this.requestsUpdated.emit(this.PTORequests.slice());
+    this.ptoInterface.splice(arrayIndex, 1);
+    this.requestsUpdated.emit(this.ptoInterface.slice());
   }
 
   /*
