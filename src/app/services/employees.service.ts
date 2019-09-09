@@ -1,15 +1,10 @@
 import {Employee} from '../shared/employee.model';
-import {EventEmitter} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {catchError, map} from 'rxjs/operators';
+import {throwError} from 'rxjs';
 
 
 export class EmployeesService {
-  employeesUpdated = new EventEmitter<Employee[]>();
-  private allEmployees: Employee[] = [
-    new Employee('Jillian', 'Marcotte', 'jmarcotte@riis.com', 1, 'password', 120),
-    new Employee('Maria', 'Lee', 'mlee@riis.com', 2, 'password', 120)
-  ];
-
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -21,20 +16,29 @@ export class EmployeesService {
   }
 
   getEmployees() {
-    return this.allEmployees.slice();
+    return this.http.get('http://localhost:8080/employees', this.httpOptions)
+      .pipe(
+        map(responseData => {
+          const employeeArray: Employee[] = [];
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              employeeArray.push({...responseData[key], arrayIndex: key});
+            }
+          }
+          return employeeArray;
+        }),
+        catchError(errorRes => {
+          return throwError(errorRes);
+        })
+      );
   }
 
-  addEmployee(newEmployee: Employee) {
-    this.allEmployees.push(newEmployee);
-    this.employeesUpdated.emit(this.allEmployees.slice());
-  }
-
-  createEmployee(newEmployee: Employee){
+  createEmployee(newEmployee: Employee) {
     return this.http.post('http://localhost:8080/employees', {
-      'firstname': newEmployee.Firstname,
-      'lastname': newEmployee.Lastname,
+      'firstname': newEmployee.firstname,
+      'lastname': newEmployee.lastname,
       'email': newEmployee.email,
-      'roleID': newEmployee.RoleID,
+      'roleID': newEmployee.roleID,
       'password': newEmployee.password
     }, this.httpOptions);
   }

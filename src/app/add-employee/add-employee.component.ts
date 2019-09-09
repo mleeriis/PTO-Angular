@@ -21,9 +21,8 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.allEmployees = this.employeeService.getEmployees();
-    this.employeeService.employeesUpdated.subscribe((updatedEmployees: Employee[]) => {
-      this.allEmployees = updatedEmployees;
+    this.employeeService.getEmployees().subscribe(employeeRes => {
+      this.allEmployees = employeeRes;
     });
   }
 
@@ -38,11 +37,10 @@ export class AddEmployeeComponent implements OnInit {
 
     const createObs: Observable<object> = this.employeeService.createEmployee(newEmployee);
 
-    createObs.subscribe(responseData => {
+    createObs.subscribe(() => {
       this.errorMessage = '';
       this.successMessage = 'Successfully created employee';
       this.createEmployeeForm.reset();
-      this.employeeService.addEmployee(newEmployee);
     }, error => {
       this.successMessage = '';
       this.errorMessage = error.error.message;

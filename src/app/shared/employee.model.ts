@@ -1,9 +1,9 @@
 export class Employee {
   constructor(
-    public Firstname: string,
-    public Lastname: string,
+    public firstname: string,
+    public lastname: string,
     public email: string,
-    public RoleID: number,
+    public roleID: number,
     public password: string,
     public balance?: number,
     public Id?: number) {
