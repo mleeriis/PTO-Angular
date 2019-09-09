@@ -2,7 +2,8 @@ import {PTORequest} from '../shared/pto-request.model';
 import {EventEmitter} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {PTOInterface} from '../shared/pto-interface';
-import {map} from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
+import {throwError} from 'rxjs';
 
 export class RequestsService {
   requestsUpdated = new EventEmitter<PTORequest[]>();
@@ -31,24 +32,25 @@ export class RequestsService {
   constructor(private http: HttpClient) {
   }
 
-  getPTORequests() {
-    return this.PTORequests.slice();
+  getAllPTORequests() {
+    return this.http.get('http://localhost:8080/pto?page=0&limit=25', this.httpOptions)
+      .pipe(
+        map(responseData => {
+          const ptoArray: PTOInterface[] = [];
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              ptoArray.push({...responseData[key], id: key});
+            }
+          }
+          return ptoArray;
+        }),
+        catchError(errorRes => {
+          return throwError(errorRes);
+        })
+      );
   }
 
   getCurrentUsersRequests() {
-    return this.http.get('http://localhost:8080/pto?page=0&limit=25', this.httpOptions)
-      .pipe(
-      map(responseData => {
-        const ptoArray: PTOInterface[] = [];
-        for (const key in responseData){
-          if (responseData.hasOwnProperty(key)){
-            ptoArray.push({ ...responseData[key], id: key});
-          }
-        }
-        return ptoArray;
-      })
-      );
-
     // const currentRequests: PTORequest[] = [];
     // for (const aRequest of this.PTORequests) {
     //   if (aRequest.EmployeeId === employeeID) {
@@ -80,8 +82,8 @@ export class RequestsService {
   }
 
 
-  processRequest(pendingRequest: PTORequest, statusCode: number) {
-    const requestID = pendingRequest.Id;
+  processRequest(pendingRequest: PTOInterface, statusCode: number) {
+    const requestID = pendingRequest.id;
     return requestID;
   }
 

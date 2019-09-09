@@ -17,9 +17,9 @@ export class ViewRequestsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.requestsService.getCurrentUsersRequests().subscribe(ptoRequests => {
-      this.currentRequests = ptoRequests;
-    });
+    // this.requestsService.getCurrentUsersRequests().subscribe(ptoRequests => {
+    //   this.currentRequests = ptoRequests;
+    // });
 
     // this.currentEmployeeRequests = this.requestsService.getCurrentUsersRequests(this.authService.employeeId);
     this.requestsService.requestsUpdated.subscribe((newRequests: PTORequest[]) => {

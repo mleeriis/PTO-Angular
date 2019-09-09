@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RequestsService} from '../services/requests.service';
-import {PTORequest} from '../shared/pto-request.model';
+import {PTOInterface} from '../shared/pto-interface';
 
 @Component({
   selector: 'app-hr-view',
@@ -8,26 +8,28 @@ import {PTORequest} from '../shared/pto-request.model';
   styleUrls: ['./hr-view.component.css']
 })
 export class HrViewComponent implements OnInit {
-  allRequests: PTORequest[] = [];
-  approvedRequests: PTORequest[] = [];
-  pendingRequests: PTORequest[] = [];
-  deniedRequests: PTORequest[] = [];
+  allRequests: PTOInterface[] = [];
+  approvedRequests: PTOInterface[] = [];
+  pendingRequests: PTOInterface[] = [];
+  deniedRequests: PTOInterface[] = [];
 
   constructor(private requestsService: RequestsService) {
   }
 
   ngOnInit() {
-    this.allRequests = this.requestsService.getPTORequests();
-    this.sortRequests();
+    this.requestsService.getAllPTORequests().subscribe(ptoRequests => {
+      this.allRequests = ptoRequests;
+      this.sortRequests();
+    });
   }
 
-  onProcessRequest(pendingRequest: PTORequest, arrayIndex: number, change: string) {
+  onProcessRequest(pendingRequest: PTOInterface, arrayIndex: number, change: string) {
     if (change === 'approve') {
-      pendingRequest.Status = 1;
+      pendingRequest.status = 1;
       this.requestsService.processRequest(pendingRequest, 1);
       this.approvedRequests.push(pendingRequest);
     } else {
-      pendingRequest.Status = 3;
+      pendingRequest.status = 3;
       this.requestsService.processRequest(pendingRequest, 3);
       this.deniedRequests.push(pendingRequest);
     }
@@ -35,8 +37,10 @@ export class HrViewComponent implements OnInit {
   }
 
   private sortRequests() {
+    console.log(this.allRequests);
     for (const entry of this.allRequests) {
-      switch (entry.Status) {
+      console.log(entry);
+      switch (entry.status) {
         case 1:
           this.approvedRequests.push(entry);
           break;
@@ -51,5 +55,10 @@ export class HrViewComponent implements OnInit {
       }
     }
   }
+
+  private convertHTMLToDate(inputDate: string) {
+    return (new Date(new Date(inputDate).toLocaleString('en-US', {timeZone: 'UTC'}))).toString().substring(0, 16);
+  }
 }
+
 
