@@ -5,10 +5,6 @@ import {catchError, map} from 'rxjs/operators';
 import {throwError} from 'rxjs';
 
 export class RequestsService {
-  requestsUpdated = new EventEmitter<PTOInterface[]>();
-
-  ptoInterface: PTOInterface[];
-
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -78,11 +74,6 @@ export class RequestsService {
 
   deleteRequest(id: number) {
     return this.http.delete('http://localhost:8080/pto/' + id, this.httpOptions);
-  }
-
-  updateRequestArray(arrayIndex: number) {
-    this.ptoInterface.splice(arrayIndex, 1);
-    this.requestsUpdated.emit(this.ptoInterface.slice());
   }
 
   /*
