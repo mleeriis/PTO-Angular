@@ -1,4 +1,4 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {PTOInterface} from '../shared/pto-interface';
 import {catchError, map} from 'rxjs/operators';
 import {throwError} from 'rxjs';
@@ -6,11 +6,13 @@ import {throwError} from 'rxjs';
 export class RequestsService {
   readonly API_URL = 'http://localhost:8080/';
 
+  private apiParams = new HttpParams();
+
   constructor(private http: HttpClient) {
   }
 
   getAllPTORequests() {
-    return this.http.get(this.API_URL + 'pto?page=0&limit=25')
+    return this.http.get(this.API_URL + 'pto')
       .pipe(
         map(responseData => {
           const ptoArray: PTOInterface[] = [];
@@ -28,7 +30,10 @@ export class RequestsService {
   }
 
   getCurrentUsersRequests(employeeID: number) {
-    return this.http.get(this.API_URL + 'pto?page=0&limit=25&empID=' + employeeID)
+    this.apiParams = this.apiParams.append('empID', employeeID.toString())
+    return this.http.get(this.API_URL + 'pto', {
+      params: this.apiParams
+    })
       .pipe(
         map(responseData => {
           const ptoArray: PTOInterface[] = [];
