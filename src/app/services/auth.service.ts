@@ -6,6 +6,8 @@ export class AuthService {
   employeeId: number;
   employeeName: string;
 
+  readonly  API_URL = 'http://localhost:8080/';
+
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -27,7 +29,7 @@ export class AuthService {
   }
 
   authenticate(email: string, password: string, callback, errorCallback) {
-    this.http.post('http://localhost:8080/login',
+    this.http.post(this.API_URL + 'login',
       {
         'email': email,
         'password': password
@@ -48,7 +50,7 @@ export class AuthService {
   }
 
   getData(email: string) {
-    this.http.get<{ id: number, firstname: string, lastname: string, email: string, roleID: number }>('http://localhost:8080/employees/' + email).subscribe(responseData => {
+    this.http.get<{ id: number, firstname: string, lastname: string, email: string, roleID: number }>(this.API_URL + 'employees/' + email).subscribe(responseData => {
       this.employeeId = responseData.id;
       this.employeeType = responseData.roleID;
       this.employeeName = responseData.firstname + ' ' + responseData.lastname;

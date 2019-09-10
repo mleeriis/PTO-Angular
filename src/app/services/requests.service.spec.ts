@@ -5,6 +5,7 @@ import {RequestsService} from './requests.service';
 describe('RequestsService', () => {
   let httpTestingController: HttpTestingController;
   let service: RequestsService;
+  const apiUrl = 'http://localhost:8080/';
 
   const dummyRequest = {
     employeeID: 1,
@@ -37,7 +38,7 @@ describe('RequestsService', () => {
       expect(resData).toEqual(dummyRequest);
     });
 
-    const req = httpTestingController.expectOne('http://localhost:8080/pto');
+    const req = httpTestingController.expectOne(apiUrl + 'pto');
     expect(req.request.method).toEqual('POST');
     expect(req.request.responseType).toEqual('json');
 

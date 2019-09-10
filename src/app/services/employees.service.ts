@@ -5,6 +5,7 @@ import {throwError} from 'rxjs';
 
 
 export class EmployeesService {
+  readonly API_URL = 'http://localhost:8080/';
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -16,7 +17,7 @@ export class EmployeesService {
   }
 
   getEmployees() {
-    return this.http.get('http://localhost:8080/employees', this.httpOptions)
+    return this.http.get(this.API_URL + 'employees', this.httpOptions)
       .pipe(
         map(responseData => {
           const employeeArray: Employee[] = [];
@@ -34,7 +35,7 @@ export class EmployeesService {
   }
 
   createEmployee(newEmployee: Employee) {
-    return this.http.post('http://localhost:8080/employees', {
+    return this.http.post(this.API_URL + 'employees', {
       'firstname': newEmployee.firstname,
       'lastname': newEmployee.lastname,
       'email': newEmployee.email,

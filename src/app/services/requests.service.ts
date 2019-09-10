@@ -4,6 +4,8 @@ import {catchError, map} from 'rxjs/operators';
 import {throwError} from 'rxjs';
 
 export class RequestsService {
+  readonly API_URL = 'http://localhost:8080/';
+
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -15,7 +17,7 @@ export class RequestsService {
   }
 
   getAllPTORequests() {
-    return this.http.get('http://localhost:8080/pto?page=0&limit=25', this.httpOptions)
+    return this.http.get(this.API_URL + 'pto?page=0&limit=25', this.httpOptions)
       .pipe(
         map(responseData => {
           const ptoArray: PTOInterface[] = [];
@@ -33,7 +35,7 @@ export class RequestsService {
   }
 
   getCurrentUsersRequests(employeeID: number) {
-    return this.http.get('http://localhost:8080/pto?page=0&limit=25&empID=' + employeeID, this.httpOptions)
+    return this.http.get(this.API_URL + 'pto?page=0&limit=25&empID=' + employeeID, this.httpOptions)
       .pipe(
         map(responseData => {
           const ptoArray: PTOInterface[] = [];
@@ -55,13 +57,13 @@ export class RequestsService {
   // ^ startDate and endDate as strings
   // INSERT INTO Requests VALUES (EmployeeID, StartDate, EndDate, 2);
   createPtoRequest(newRequest: PTOInterface) {
-    return this.http.post('http://localhost:8080/pto',
+    return this.http.post(this.API_URL + 'pto',
       newRequest, this.httpOptions);
   }
 
 
   processRequest(pendingRequestID: number, statusCode: number) {
-    return this.http.put('http://localhost:8080/pto/' + pendingRequestID,
+    return this.http.put(this.API_URL + 'pto/' + pendingRequestID,
       {
         'status': statusCode
       },
@@ -72,7 +74,7 @@ export class RequestsService {
   // UPDATE Requests SET Status = $statusCode WHERE Id = $requestID;
 
   deleteRequest(id: number) {
-    return this.http.delete('http://localhost:8080/pto/' + id, this.httpOptions);
+    return this.http.delete(this.API_URL + 'pto/' + id, this.httpOptions);
   }
 
   /*

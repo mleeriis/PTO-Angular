@@ -5,6 +5,7 @@ import {HttpClientTestingModule, HttpTestingController} from '@angular/common/ht
 describe('EmployeeService', () => {
   let httpTestingController: HttpTestingController;
   let service: EmployeesService;
+  const apiUrl = 'http://localhost:8080/';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -43,7 +44,7 @@ describe('EmployeeService', () => {
         expect(employees).toEqual(dummyEmployees);
       });
 
-      const req = httpTestingController.expectOne('http://localhost:8080/employees');
+      const req = httpTestingController.expectOne(apiUrl + 'employees');
       expect(req.request.method).toEqual('GET');
       expect(req.request.responseType).toEqual('json');
 
@@ -62,7 +63,7 @@ describe('EmployeeService', () => {
         expect(resData).toEqual(dummyEmployee);
       });
 
-    const req = httpTestingController.expectOne('http://localhost:8080/employees');
+    const req = httpTestingController.expectOne(apiUrl + 'employees');
     expect(req.request.method).toEqual('POST');
     expect(req.request.responseType).toEqual('json');
 
