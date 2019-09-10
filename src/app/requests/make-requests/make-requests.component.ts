@@ -21,6 +21,7 @@ export class MakeRequestsComponent implements OnInit {
 
   currentDate: Date = new Date();
   currentDateString: string = this.currentDate.toISOString().substr(0, 10);
+  //String: YYYY-MM-DD
 
   constructor(private requestsService: RequestsService, private router: Router, private authService: AuthService) {
   }
@@ -40,21 +41,20 @@ export class MakeRequestsComponent implements OnInit {
       status: 2
     };
 
-    this.requestsService.createPtoRequest(newRequest).subscribe(() => {
-      this.router.navigate(['/view-requests']);
-    }, errorRes => {
-      this.errorMessage = errorRes.message;
-    });
 
-    // if (startDate.toDateString() === this.currentDate.toDateString()) {
-    //   this.errorMessage = 'PTO cannot start today';
-    // }
-
-    //else if ((startDate.getTime() || endDate.getTime()) < this.currentDate.getTime()) {
-    //   this.errorMessage = 'Cannot choose a date in the past';
-    // } else if (endDate.getTime() < startDate.getTime()) {
-    //   this.errorMessage = 'End Date cannot be before Start Date';
-    // } else {
+    if (startDate === this.currentDateString) {
+      this.errorMessage = 'PTO cannot start today';
+    } else if ((startDate || endDate) < this.currentDateString) {
+      this.errorMessage = 'Cannot choose a date in the past';
+    } else if (endDate < startDate) {
+      this.errorMessage = 'End Date cannot be before Start Date';
+    } else {
+      this.requestsService.createPtoRequest(newRequest).subscribe(() => {
+        this.router.navigate(['/view-requests']);
+      }, errorRes => {
+        this.errorMessage = errorRes.message;
+      });
+    }
   }
 
 }
