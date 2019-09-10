@@ -1,4 +1,4 @@
-import {TestBed, async, inject} from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
 import {EmployeesService} from './employees.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
@@ -17,7 +17,7 @@ describe('EmployeeService', () => {
     service = TestBed.get(EmployeesService);
   });
 
-  afterEach(inject([HttpTestingController], (httpMock: HttpTestingController) => {
+  afterEach(inject([HttpTestingController], () => {
     httpTestingController.verify();
   }));
 
