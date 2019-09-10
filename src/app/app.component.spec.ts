@@ -14,6 +14,7 @@ import {FormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 import {AuthGuard} from './services/auth-guard.service';
 import {AuthService} from './services/auth.service';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -33,7 +34,8 @@ describe('AppComponent', () => {
       imports: [
         BrowserModule,
         FormsModule,
-        AppRoutingModule
+        AppRoutingModule,
+        HttpClientModule
       ],
       providers: [AuthGuard, AuthService]
     }).compileComponents();
