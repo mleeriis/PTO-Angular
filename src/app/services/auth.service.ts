@@ -1,4 +1,4 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 export class AuthService {
   loggedIn = false;
@@ -6,13 +6,7 @@ export class AuthService {
   employeeId: number;
   employeeName: string;
 
-  readonly  API_URL = 'http://localhost:8080/';
-
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  };
+  readonly API_URL = 'http://localhost:8080/';
 
   constructor(private http: HttpClient) {
   }
@@ -33,7 +27,7 @@ export class AuthService {
       {
         'email': email,
         'password': password
-      }, this.httpOptions).subscribe(
+      }).subscribe(
       () => {
         this.loggedIn = true;
         return callback && callback();

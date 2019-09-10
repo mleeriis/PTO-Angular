@@ -1,4 +1,4 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {PTOInterface} from '../shared/pto-interface';
 import {catchError, map} from 'rxjs/operators';
 import {throwError} from 'rxjs';
@@ -6,18 +6,11 @@ import {throwError} from 'rxjs';
 export class RequestsService {
   readonly API_URL = 'http://localhost:8080/';
 
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    })
-  };
-
   constructor(private http: HttpClient) {
   }
 
   getAllPTORequests() {
-    return this.http.get(this.API_URL + 'pto?page=0&limit=25', this.httpOptions)
+    return this.http.get(this.API_URL + 'pto?page=0&limit=25')
       .pipe(
         map(responseData => {
           const ptoArray: PTOInterface[] = [];
@@ -35,7 +28,7 @@ export class RequestsService {
   }
 
   getCurrentUsersRequests(employeeID: number) {
-    return this.http.get(this.API_URL + 'pto?page=0&limit=25&empID=' + employeeID, this.httpOptions)
+    return this.http.get(this.API_URL + 'pto?page=0&limit=25&empID=' + employeeID)
       .pipe(
         map(responseData => {
           const ptoArray: PTOInterface[] = [];
@@ -58,7 +51,7 @@ export class RequestsService {
   // INSERT INTO Requests VALUES (EmployeeID, StartDate, EndDate, 2);
   createPtoRequest(newRequest: PTOInterface) {
     return this.http.post(this.API_URL + 'pto',
-      newRequest, this.httpOptions);
+      newRequest);
   }
 
 
@@ -66,15 +59,14 @@ export class RequestsService {
     return this.http.put(this.API_URL + 'pto/' + pendingRequestID,
       {
         'status': statusCode
-      },
-      this.httpOptions);
+      });
   }
 
   // SQL Query to update
   // UPDATE Requests SET Status = $statusCode WHERE Id = $requestID;
 
   deleteRequest(id: number) {
-    return this.http.delete(this.API_URL + 'pto/' + id, this.httpOptions);
+    return this.http.delete(this.API_URL + 'pto/' + id);
   }
 
   /*
