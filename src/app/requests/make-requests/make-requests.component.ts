@@ -1,7 +1,6 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {PTORequest} from '../../shared/pto-request.model';
 import {RequestsService} from '../../services/requests.service';
 import {NgForm} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
@@ -14,9 +13,6 @@ import {PTOInterface} from '../../shared/pto-interface';
 })
 export class MakeRequestsComponent implements OnInit {
   @ViewChild('createRequestForm', {static: true}) createRequest: NgForm;
-
-  @Output() requestMade = new EventEmitter<PTORequest>();
-
   errorMessage = '';
 
   currentDate: Date = new Date();
@@ -40,7 +36,6 @@ export class MakeRequestsComponent implements OnInit {
       endDate: endDate,
       status: 2
     };
-
 
     if (startDate === this.currentDateString) {
       this.errorMessage = 'PTO cannot start today';

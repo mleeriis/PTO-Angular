@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {EmployeesService} from '../services/employees.service';
 import {Employee} from '../shared/employee.model';
 import {NgForm} from '@angular/forms';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-add-employee',
@@ -35,9 +34,7 @@ export class AddEmployeeComponent implements OnInit {
     const newEmployee = new Employee(firstName, lastName, email, roleID, password, 120);
 
 
-    const createObs: Observable<object> = this.employeeService.createEmployee(newEmployee);
-
-    createObs.subscribe(() => {
+    this.employeeService.createEmployee(newEmployee).subscribe(() => {
       this.errorMessage = '';
       this.successMessage = 'Successfully created employee';
       this.createEmployeeForm.reset();
