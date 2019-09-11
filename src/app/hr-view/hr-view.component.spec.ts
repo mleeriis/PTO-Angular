@@ -1,19 +1,16 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {HrViewComponent} from './hr-view.component';
 import {RequestsService} from '../services/requests.service';
-import {HttpClient, HttpHandler} from '@angular/common/http';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
 describe('HR View Component', () => {
   let component: HrViewComponent;
   let fixture: ComponentFixture<HrViewComponent>;
+  const requestsServiceSpy = jasmine.createSpyObj('RequestsService', ['getAllPTORequests', 'processRequest']);
 
   beforeEach(async(() => {
       TestBed.configureTestingModule({
         declarations: [HrViewComponent],
-        providers: [RequestsService,
-          HttpClient,
-          HttpHandler]
+        providers: [{provide: RequestsService, useValue: requestsServiceSpy}]
       });
       fixture = TestBed.createComponent(HrViewComponent);
       component = fixture.componentInstance;
