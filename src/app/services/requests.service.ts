@@ -30,7 +30,7 @@ export class RequestsService {
   }
 
   getCurrentUsersRequests(employeeID: number) {
-    this.apiParams = this.apiParams.append('empID', employeeID.toString())
+    this.apiParams = this.apiParams.set('empID', employeeID.toString());
     return this.http.get(this.API_URL + 'pto', {
       params: this.apiParams
     })
