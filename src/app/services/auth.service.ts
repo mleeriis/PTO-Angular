@@ -27,8 +27,13 @@ export class AuthService {
       {
         'email': email,
         'password': password
+      },
+      {
+        observe: 'response'
       }).subscribe(
-      () => {
+      (resp) => {
+        localStorage.setItem('token', resp.headers.get('authorization'));
+        console.log(localStorage.getItem('token'));
         this.loggedIn = true;
         return callback && callback();
       },
