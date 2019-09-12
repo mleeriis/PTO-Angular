@@ -4,4 +4,5 @@ export interface PTOInterface {
   endDate: string;
   status: number;
   id?: number;
+  fullName?: string;
 }

@@ -2,9 +2,10 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {PTOInterface} from '../shared/pto-interface';
 import {catchError, map} from 'rxjs/operators';
 import {throwError} from 'rxjs';
+import {environment} from '../../environments/environment';
 
 export class RequestsService {
-  readonly API_URL = 'http://localhost:8080/';
+  readonly API_URL = environment.API_URL;
 
   private apiParams = new HttpParams();
 

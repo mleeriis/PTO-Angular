@@ -1,11 +1,12 @@
 import {TestBed, inject} from '@angular/core/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {RequestsService} from './requests.service';
+import {environment} from '../../environments/environment';
 
 describe('RequestsService', () => {
   let httpTestingController: HttpTestingController;
   let service: RequestsService;
-  const apiUrl = 'http://localhost:8080/';
+  const apiUrl = environment.API_URL;
 
   const dummyRequest = {
     employeeID: 1,

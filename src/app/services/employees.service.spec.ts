@@ -1,11 +1,12 @@
 import {TestBed, inject} from '@angular/core/testing';
 import {EmployeesService} from './employees.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {environment} from '../../environments/environment';
 
 describe('EmployeeService', () => {
   let httpTestingController: HttpTestingController;
   let service: EmployeesService;
-  const apiUrl = 'http://localhost:8080/';
+  const apiUrl = environment.API_URL;
 
   beforeEach(() => {
     TestBed.configureTestingModule({

@@ -1,4 +1,5 @@
 import {HttpClient} from '@angular/common/http';
+import {environment} from '../../environments/environment';
 
 export class AuthService {
   loggedIn = false;
@@ -6,7 +7,7 @@ export class AuthService {
   employeeId: number;
   employeeName: string;
 
-  readonly API_URL = 'http://localhost:8080/';
+  readonly API_URL = environment.API_URL;
 
   constructor(private http: HttpClient) {
   }
