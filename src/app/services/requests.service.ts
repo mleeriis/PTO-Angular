@@ -15,6 +15,8 @@ export class RequestsService {
   getPtoRequests(employeeID?: number) {
     if (employeeID) {
       this.apiParams = this.apiParams.set('empID', employeeID.toString());
+    } else {
+      this.apiParams = this.apiParams.set('empID', '');
     }
     return this.http.get(this.API_URL + 'pto', {
       params: this.apiParams

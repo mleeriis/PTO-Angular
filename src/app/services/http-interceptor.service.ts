@@ -11,7 +11,7 @@ export class HttpInterceptorService implements HttpInterceptor {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': localStorage.getItem('token')
+        'Authorization': localStorage.getItem('token') || ''
       })
     });
     return next.handle(modifiedRequest);
