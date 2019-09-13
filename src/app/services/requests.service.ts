@@ -12,26 +12,10 @@ export class RequestsService {
   constructor(private http: HttpClient) {
   }
 
-  getAllPTORequests() {
-    return this.http.get(this.API_URL + 'pto')
-      .pipe(
-        map(responseData => {
-          const ptoArray: PTOInterface[] = [];
-          for (const key in responseData) {
-            if (responseData.hasOwnProperty(key)) {
-              ptoArray.push({...responseData[key], arrayIndex: key});
-            }
-          }
-          return ptoArray;
-        }),
-        catchError(errorRes => {
-          return throwError(errorRes.message);
-        })
-      );
-  }
-
-  getCurrentUsersRequests(employeeID: number) {
-    this.apiParams = this.apiParams.set('empID', employeeID.toString());
+  getPtoRequests(employeeID?: number) {
+    if (employeeID) {
+      this.apiParams = this.apiParams.set('empID', employeeID.toString());
+    }
     return this.http.get(this.API_URL + 'pto', {
       params: this.apiParams
     })

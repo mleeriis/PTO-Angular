@@ -38,7 +38,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let request of approvedRequests">
-      <td>{{ request.EmployeeName }}
+      <td>{{ request.fullName }}
       </td>
       <td>{{ convertHTMLToDate(request.startDate).toString() }}
       </td>
@@ -59,7 +59,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let request of deniedRequests">
-      <td>{{ request.EmployeeName }}
+      <td>{{ request.fullName }}
       </td>
       <td>{{ convertHTMLToDate(request.startDate).toString() }}
       </td>

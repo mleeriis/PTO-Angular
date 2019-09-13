@@ -17,7 +17,7 @@ export class HrViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.requestsService.getAllPTORequests().subscribe(ptoRequests => {
+    this.requestsService.getPtoRequests().subscribe(ptoRequests => {
       this.allRequests = ptoRequests;
       this.sortRequests();
     });
