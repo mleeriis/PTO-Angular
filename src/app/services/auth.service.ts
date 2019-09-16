@@ -45,6 +45,7 @@ export class AuthService {
   }
 
   logout() {
+    localStorage.clear();
     this.loggedIn = false;
   }
 
