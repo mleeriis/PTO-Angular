@@ -15,6 +15,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AuthGuard} from './services/auth-guard.service';
 import {AuthService} from './services/auth.service';
 import {HttpClientModule} from '@angular/common/http';
+import {ChangePasswordComponent} from './change-password/change-password.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -29,7 +30,8 @@ describe('AppComponent', () => {
         AddEmployeeComponent,
         CompanyHolidayComponent,
         LoginComponent,
-        PageNotFoundComponent
+        PageNotFoundComponent,
+        ChangePasswordComponent
       ],
       imports: [
         BrowserModule,

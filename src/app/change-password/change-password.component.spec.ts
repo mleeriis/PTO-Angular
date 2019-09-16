@@ -1,25 +1,16 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
+import {EmployeesService} from '../services/employees.service';
+import {ChangePasswordComponent} from './change-password.component';
 
-import { ChangePasswordComponent } from './change-password.component';
-
-describe('ChangePasswordComponent', () => {
-  let component: ChangePasswordComponent;
-  let fixture: ComponentFixture<ChangePasswordComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ChangePasswordComponent ]
-    })
-    .compileComponents();
-  }));
-
+describe('Add Employee Component', () => {
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChangePasswordComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    TestBed.configureTestingModule({
+      providers: [EmployeesService]
+    });
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should be created', () => {
+    expect(ChangePasswordComponent).toBeTruthy();
   });
+
 });
