@@ -6,6 +6,7 @@ export class AuthService {
   employeeType: number;
   employeeId: number;
   employeeName: string;
+  employeeEmail: string;
 
   readonly API_URL = environment.API_URL;
 
@@ -54,6 +55,7 @@ export class AuthService {
       this.employeeId = responseData.id;
       this.employeeType = responseData.roleID;
       this.employeeName = responseData.firstname + ' ' + responseData.lastname;
+      this.employeeEmail = responseData.email;
     });
   }
 

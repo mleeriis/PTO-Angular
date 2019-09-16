@@ -17,6 +17,7 @@ import {AuthGuard} from './services/auth-guard.service';
 import {AuthService} from './services/auth.service';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {HttpInterceptorService} from './services/http-interceptor.service';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {HttpInterceptorService} from './services/http-interceptor.service';
     AddEmployeeComponent,
     CompanyHolidayComponent,
     LoginComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

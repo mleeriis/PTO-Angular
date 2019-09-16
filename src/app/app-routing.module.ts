@@ -9,6 +9,7 @@ import {CompanyHolidayComponent} from './company-holiday/company-holiday.compone
 import {LoginComponent} from './login/login.component';
 import {AuthGuard} from './services/auth-guard.service';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {ChangePasswordComponent} from './change-password/change-password.component';
 
 
 const appRoutes: Routes = [
@@ -18,6 +19,7 @@ const appRoutes: Routes = [
   {path: 'hr', canActivate: [AuthGuard], component: HrViewComponent},
   {path: 'add-employee', canActivate: [AuthGuard], component: AddEmployeeComponent},
   {path: 'company-holidays', canActivate: [AuthGuard], component: CompanyHolidayComponent},
+  {path: 'change-password', canActivate: [AuthGuard], component: ChangePasswordComponent},
   {path: 'login', component: LoginComponent},
   {path: '**', component: PageNotFoundComponent}
 ];

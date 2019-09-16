@@ -38,4 +38,10 @@ export class EmployeesService {
       'password': newEmployee.password
     });
   }
+
+  changePassword(email: string, password: string){
+    return this.http.put(this.API_URL + 'employees/' + email, {
+      'password': password
+    });
+  }
 }
