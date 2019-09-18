@@ -21,6 +21,7 @@ export class AddEmployeeComponent implements OnInit {
 
   ngOnInit() {
     this.employeeService.getEmployees().subscribe(employeeRes => {
+      console.log(employeeRes);
       this.allEmployees = employeeRes;
     });
   }
@@ -31,7 +32,7 @@ export class AddEmployeeComponent implements OnInit {
     const email = this.createEmployeeForm.value.email;
     const roleID = this.createEmployeeForm.value.RoleID;
     const password = this.createEmployeeForm.value.password;
-    const newEmployee = new Employee(firstName, lastName, email, roleID, password, 120);
+    const newEmployee = new Employee(firstName, lastName, email, roleID, password);
 
 
     this.employeeService.createEmployee(newEmployee).subscribe(() => {

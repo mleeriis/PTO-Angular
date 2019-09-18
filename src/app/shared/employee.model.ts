@@ -1,3 +1,5 @@
+import {BalanceModel} from './balance.model';
+
 export class Employee {
   constructor(
     public firstname: string,
@@ -5,7 +7,7 @@ export class Employee {
     public email: string,
     public roleID: number,
     public password: string,
-    public balance?: number,
+    public balance?: BalanceModel,
     public Id?: number) {
   }
 }
