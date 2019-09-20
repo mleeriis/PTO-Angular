@@ -44,5 +44,6 @@ export class AddEmployeeComponent implements OnInit {
       this.errorMessage = error.error.message;
     });
 
+    // TODO: Update table showing all employees with newly created employee
   }
 }
