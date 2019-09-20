@@ -71,7 +71,7 @@
       <th>email</th>
       <th>Role</th>
       <th>PTO Balance (hours)</th>
-      <th>Add PTO Balance</th>
+      <th>Add MUB</th>
     </tr>
   </thead>
   <tbody>
@@ -84,13 +84,13 @@
       <td>
         <form (ngSubmit)="onAddBalance(employee, additionalBalanceInput.value)" #addBalanceForm="ngForm">
           <div class="form-group" [ngClass]="{'has-error': additionalBalanceInput.invalid && additionalBalanceInput.touched}">
-            <label><input
+            <input
               type="text"
               name="addtionalBalance"
               class="form-control"
               required
               ngModel
-              #additionalBalanceInput="ngModel"></label>
+              #additionalBalanceInput="ngModel">
           </div>
           <button type="submit" class="btn btn-primary" name="AddBalance" [disabled]="!additionalBalanceInput.value">Add Balance</button>
         </form>
