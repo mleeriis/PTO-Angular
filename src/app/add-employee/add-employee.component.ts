@@ -11,6 +11,7 @@ import {NgForm} from '@angular/forms';
 })
 export class AddEmployeeComponent implements OnInit {
   @ViewChild('addEmployeeForm', {static: true}) createEmployeeForm: NgForm;
+  @ViewChild('addBalanceForm', {static: true}) updateBalance: NgForm;
 
   allEmployees: Employee[];
   errorMessage: string = '';
@@ -21,7 +22,6 @@ export class AddEmployeeComponent implements OnInit {
 
   ngOnInit() {
     this.employeeService.getEmployees().subscribe(employeeRes => {
-      console.log(employeeRes);
       this.allEmployees = employeeRes;
     });
   }
@@ -45,5 +45,17 @@ export class AddEmployeeComponent implements OnInit {
     });
 
     // TODO: Update table showing all employees with newly created employee
+  }
+
+  onAddBalance(employeeData: Employee, additionalBalance: string) {
+    const currentBalance = employeeData.balance.hoursBalance;
+    const newBalance = currentBalance + +additionalBalance;
+    const empID = employeeData.id;
+
+    this.employeeService.addBalance(empID, newBalance).subscribe(() => {
+      // TODO: After successful update of balance, reset form and refresh table
+    }, () => {
+      // TODO: After update balance unsuccessful, display error message for user
+    });
   }
 }

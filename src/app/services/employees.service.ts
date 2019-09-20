@@ -39,9 +39,15 @@ export class EmployeesService {
     });
   }
 
-  changePassword(email: string, password: string){
+  changePassword(email: string, password: string) {
     return this.http.put(this.API_URL + 'employees/' + email, {
       'password': password
+    });
+  }
+
+  addBalance(empID: number, newBalance: number) {
+    return this.http.put(this.API_URL + 'balance/' + empID, {
+      'hoursBalance': newBalance
     });
   }
 }

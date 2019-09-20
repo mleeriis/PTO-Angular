@@ -71,15 +71,30 @@
       <th>email</th>
       <th>Role</th>
       <th>PTO Balance (hours)</th>
+      <th>Add PTO Balance</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let employee of allEmployees">
+    <tr *ngFor="let employee of allEmployees;">
       <td>{{employee.firstname}}</td>
       <td>{{employee.lastname}}</td>
       <td>{{employee.email}}</td>
       <td>{{employee.roleID}}</td>
       <td>{{employee.balance.hoursBalance}}</td>
+      <td>
+        <form (ngSubmit)="onAddBalance(employee, additionalBalanceInput.value)" #addBalanceForm="ngForm">
+          <div class="form-group" [ngClass]="{'has-error': additionalBalanceInput.invalid && additionalBalanceInput.touched}">
+            <label><input
+              type="text"
+              name="addtionalBalance"
+              class="form-control"
+              required
+              ngModel
+              #additionalBalanceInput="ngModel"></label>
+          </div>
+          <button type="submit" class="btn btn-primary" name="AddBalance" [disabled]="!additionalBalanceInput.value">Add Balance</button>
+        </form>
+      </td>
     </tr>
   </tbody>
 </table>
