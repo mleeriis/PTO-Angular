@@ -1,7 +1,7 @@
 import {BalanceModel} from './balance.model';
 
 export class Employee {
-  id: number;
+  id?: number;
   constructor(
     public firstname: string,
     public lastname: string,
