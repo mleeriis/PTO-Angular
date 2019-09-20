@@ -32,19 +32,18 @@ export class AddEmployeeComponent implements OnInit {
     const email = this.createEmployeeForm.value.email;
     const roleID = this.createEmployeeForm.value.RoleID;
     const password = this.createEmployeeForm.value.password;
-    const newEmployee = new Employee(firstName, lastName, email, roleID, password);
+    const newEmployee = new Employee(firstName, lastName, email, roleID, password, {hoursBalance: 120});
 
 
     this.employeeService.createEmployee(newEmployee).subscribe(() => {
       this.errorMessage = '';
       this.successMessage = 'Successfully created employee';
       this.createEmployeeForm.reset();
+      this.allEmployees.push(newEmployee);
     }, error => {
       this.successMessage = '';
       this.errorMessage = error.error.message;
     });
-
-    // TODO: Update table showing all employees with newly created employee
   }
 
   onAddBalance(employeeData: Employee, additionalBalance: string) {
@@ -53,7 +52,8 @@ export class AddEmployeeComponent implements OnInit {
     const empID = employeeData.id;
 
     this.employeeService.addBalance(empID, newBalance).subscribe(() => {
-      // TODO: After successful update of balance, reset form and refresh table
+      // TODO: After successful update of balance, reset form and refresh table to give visual feedback that update was succesful
+      alert('Balance successfully added. Please refresh page');
     }, () => {
       // TODO: After update balance unsuccessful, display error message for user
     });

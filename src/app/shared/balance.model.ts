@@ -1,5 +1,5 @@
-export interface BalanceModel{
-  id: number;
-  employeeId: number;
+export interface BalanceModel {
+  id?: number;
+  employeeId?: number;
   hoursBalance: number;
 }
