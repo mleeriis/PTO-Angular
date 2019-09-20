@@ -1,5 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
+import {BalanceModel} from '../shared/balance.model';
 
 export class AuthService {
   loggedIn = false;
@@ -7,6 +8,7 @@ export class AuthService {
   employeeId: number;
   employeeName: string;
   employeeEmail: string;
+  employeeBalance: number;
 
   readonly API_URL = environment.API_URL;
 
@@ -14,6 +16,7 @@ export class AuthService {
   }
 
   isAuthenticated() {
+    // TODO: Fix isAuthenticated() so that it is based on localStorage.getItem('token') rather than a hard corded loggedIn variable
     const promise = new Promise(
       (resolve, reject) => {
         setTimeout(() => {
@@ -51,11 +54,12 @@ export class AuthService {
   }
 
   getData(email: string) {
-    this.http.get<{ id: number, firstname: string, lastname: string, email: string, roleID: number }>(this.API_URL + 'employees/' + email).subscribe(responseData => {
+    this.http.get<{ id: number, firstname: string, lastname: string, email: string, roleID: number, balance: BalanceModel }>(this.API_URL + 'employees/' + email).subscribe(responseData => {
       this.employeeId = responseData.id;
       this.employeeType = responseData.roleID;
       this.employeeName = responseData.firstname + ' ' + responseData.lastname;
       this.employeeEmail = responseData.email;
+      this.employeeBalance = responseData.balance.hoursBalance;
     });
   }
 
