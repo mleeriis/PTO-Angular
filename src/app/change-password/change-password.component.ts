@@ -27,7 +27,7 @@ export class ChangePasswordComponent implements OnInit {
     this.employeeService.changePassword(this.authService.employeeEmail, newPassword).subscribe(
       () => {
         this.successMessage = 'Successfully changed password';
-      }, (err) => {
+      }, () => {
         this.errorMessage = 'An error occurred!';
       });
 
